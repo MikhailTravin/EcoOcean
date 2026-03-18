@@ -6,11 +6,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+		<link rel="stylesheet" href="css/fancybox.min.css" />
 		<link rel="stylesheet" href="css/styles.css" />
 
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
 	</head>
 
 	<body class="preload mp">
@@ -24,19 +24,19 @@
 						<div class="header__menu">
 							<ul>
 								<li>
-									<a href="./">about</a>
+									<a href="./" data-goto=".block-intro" data-goto-header>about</a>
 								</li>
 								<li>
-									<a href="./">projects</a>
+									<a href="./" data-goto=".block-projects" data-goto-header>projects</a>
 								</li>
 								<li>
-									<a href="./">news</a>
+									<a href="./" data-goto=".block-descr-top" data-goto-header>news</a>
 								</li>
 								<li>
-									<a href="./">help us</a>
+									<a href="./" data-goto=".block-descr-bottom" data-goto-header>help us</a>
 								</li>
 								<li>
-									<a href="./">Contacts</a>
+									<a href="./" data-goto=".block-forms" data-goto-header>Contacts</a>
 								</li>
 							</ul>
 						</div>
@@ -49,24 +49,25 @@
 			</header>
 			<main class="main">
 
-				<div class="block-intro">
-					<div class="block-intro__bg">
+				<div data-watch="navigator" class="block-intro">
+					<div data-watch data-watch-once class="block-intro__bg">
 						<img src="img/image1.webp" alt="" class="">
 					</div>
 					<div class="container">
-						<div class="block-intro__content">
-							<h1 class="title1">
+						<div data-watch data-watch-once class="block-intro__content">
+							<h1 data-watch data-watch-once class="title1">
 								EcoCleanOcean
 							</h1>
-							<div class="block-intro__text">
+							<div data-watch data-watch-once class="block-intro__text">
 								Restoration and Maintenance of the Ecological Balance of the World Ocean
 							</div>
-							<p>
+							<p data-watch data-watch-once>
 								The international program "Eco Clean Ocean" unites scientific research, technical,
-								socio-cultural, and educational projects to address the issues of the World Ocean through
+								socio-cultural, and educational projects to address the issues of the World Ocean
+								through
 								the collective efforts of the global community
 							</p>
-							<div class="block-intro__buttons">
+							<div data-watch data-watch-once class="block-intro__buttons">
 								<a href="./" class="btn btn-orange">
 									<span>I want to help</span>
 									<div class="btn__icon">
@@ -85,7 +86,7 @@
 								</a>
 							</div>
 						</div>
-						<div class="block-intro__scroll">
+						<div data-watch data-watch-once class="block-intro__scroll">
 							<svg class="rotating-letters" width="190" height="190" viewBox="0 0 190 190" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<g filter="url(#filter0_d_1_1417)">
 									<path d="M150.72 97.9545C150.739 97.615 150.808 97.2201 150.929 96.77C151.045 96.3196 151.244 95.8276 151.525 95.294L152.615 95.8096C152.388 96.23 152.224 96.6277 152.124 97.0029C152.027 97.3782 151.971 97.7176 151.955 98.0212C151.931 98.4486 152.024 98.8061 152.233 99.0938C152.442 99.3855 152.702 99.5397 153.013 99.5566C153.305 99.5724 153.56 99.488 153.778 99.3035C154 99.1192 154.206 98.878 154.394 98.5797C154.586 98.2817 154.782 97.9638 154.98 97.626C155.179 97.2882 155.398 96.9716 155.639 96.6761C155.879 96.3807 156.158 96.1434 156.476 95.9643C156.794 95.7852 157.171 95.7075 157.606 95.731C158.13 95.7593 158.553 95.9023 158.875 96.1601C159.198 96.4219 159.428 96.7568 159.566 97.1649C159.708 97.5732 159.766 98.0149 159.741 98.4902C159.721 98.8577 159.675 99.2138 159.605 99.5585C159.538 99.9034 159.409 100.323 159.218 100.817L158.152 100.315C158.275 99.9693 158.366 99.6517 158.426 99.3625C158.485 99.0733 158.522 98.7969 158.537 98.5333C158.556 98.1738 158.484 97.8815 158.32 97.6563C158.155 97.4311 157.938 97.3112 157.666 97.2965C157.394 97.2818 157.151 97.3668 156.937 97.5515C156.727 97.7404 156.527 97.984 156.339 98.2823C156.15 98.5845 155.953 98.9043 155.746 99.2417C155.54 99.579 155.31 99.8951 155.058 100.19C154.805 100.489 154.508 100.727 154.166 100.905C153.828 101.087 153.427 101.165 152.964 101.14C152.448 101.112 152.018 100.961 151.672 100.686C151.331 100.411 151.078 100.039 150.915 99.5694C150.753 99.0999 150.688 98.5616 150.72 97.9545Z" fill="url(#paint0_linear_1_1417)" />
@@ -709,20 +710,20 @@
 					</div>
 				</div>
 
-				<div class="block-descr">
-					<img loading="lazy" src="img/bg2.webp" alt="" class="block-descr__bg">
-					<img loading="lazy" src="img/bg3.webp" alt="" class="block-descr__bg-mob">
+				<div class="block-descr" data-watch data-watch-once>
+					<img loading="lazy" src="img/bg2.webp" alt="" class="block-descr__bg" data-watch data-watch-once>
+					<img loading="lazy" src="img/bg3.webp" alt="" class="block-descr__bg-mob" data-watch data-watch-once>
 					<div class="container">
-						<div class="block-descr-top">
-							<h2 class="title2">
+						<div class="block-descr-top" data-watch="navigator" data-watch-once>
+							<h2 class="title2" data-watch data-watch-once>
 								Our planet is in <img src="img/danger.webp" alt="">
 							</h2>
-							<p>
+							<p data-watch data-watch-once>
 								Global pollution of the World Ocean due to human activity is disrupting the planet's
 								ecological balance
 							</p>
 							<div class="block-descr-top__body">
-								<div class="block-descr-top__column">
+								<div class="block-descr-top__column" data-watch data-watch-once>
 									<div class="block-descr-top__image">
 										<img loading="lazy" src="img/icons/danger1.svg" alt="" class="block-descr-top__icon">
 										<img loading="lazy" src="img/image2.webp" alt="" class="block-descr-top__pic1">
@@ -731,7 +732,7 @@
 										The climate is changing
 									</div>
 								</div>
-								<div class="block-descr-top__column">
+								<div class="block-descr-top__column" data-watch data-watch-once>
 									<div class="block-descr-top__image">
 										<img loading="lazy" src="img/icons/danger1.svg" alt="" class="block-descr-top__icon">
 										<img loading="lazy" src="img/image3.webp" alt="" class="block-descr-top__pic1">
@@ -740,7 +741,7 @@
 										Ocean biodiversity is declining
 									</div>
 								</div>
-								<div class="block-descr-top__column">
+								<div class="block-descr-top__column" data-watch data-watch-once>
 									<div class="block-descr-top__image">
 										<img loading="lazy" src="img/icons/danger1.svg" alt="" class="block-descr-top__icon">
 										<img loading="lazy" src="img/image4.webp" alt="" class="block-descr-top__pic1">
@@ -751,59 +752,62 @@
 								</div>
 							</div>
 						</div>
-						<div class="block-descr-center">
+						<div class="block-descr-center" data-watch data-watch-once>
 							<div class="block-descr-center__body">
-								<div class="block-descr-center__title">
+								<div class="block-descr-center__title" data-watch data-watch-once>
 									The main obstacles to solving these problems are:
 								</div>
 								<div class="block-descr-center__columns">
-									<div class="block-descr-center__column">
+									<div class="block-descr-center__column" data-watch data-watch-once>
 										<img loading="lazy" src="img/icons/icon1.svg" alt="">
 										<span>Limited understanding of the World Ocean</span>
 									</div>
-									<div class="block-descr-center__column">
+									<div class="block-descr-center__column" data-watch data-watch-once>
 										<img loading="lazy" src="img/icons/icon1.svg" alt="">
 										<span>Lack of a unified knowledge base for environmental awareness </span>
 									</div>
-									<div class="block-descr-center__column">
+									<div class="block-descr-center__column" data-watch data-watch-once>
 										<img loading="lazy" src="img/icons/icon1.svg" alt="">
 										<span>Fragmentation among environmental organizations</span>
 									</div>
 								</div>
 							</div>
-							<div class="block-descr-center__info">
-								<img src="img/bg1.webp" alt="" class="block-descr-center__bg">
-								<img src="img/bg1-mob.webp" alt="" class="block-descr-center__bg-mob">
-								<img loading="lazy" src="img/icons/info.svg" alt="" class="block-descr-center__icon">
+							<div class="block-descr-center__info" data-watch data-watch-once>
+								<img src="img/bg1.webp" alt="" class="block-descr-center__bg" data-watch data-watch-once>
+								<img src="img/bg1-mob.webp" alt="" class="block-descr-center__bg-mob" data-watch data-watch-once>
+								<img loading="lazy" src="img/icons/info.svg" alt="" class="block-descr-center__icon" data-watch data-watch-once>
 								<span>
-									Addressing these challenges requires ecological integration and the combined efforts of
+									Addressing these challenges requires ecological integration and the combined
+									efforts
+									of
 									the global community
 								</span>
 							</div>
 						</div>
-						<div class="block-descr-bottom">
+						<div class="block-descr-bottom" data-watch="navigator" data-watch-once>
 							<div class="block-descr-bottom__body">
-								<h2 class="title2">We help the planet stay healthy</h2>
+								<h2 class="title2" data-watch data-watch-once>We help the planet stay healthy</h2>
 								<div class="block-descr-bottom__columns">
-									<div class="block-descr-bottom__column">
+									<div class="block-descr-bottom__column" data-watch data-watch-once>
 										<img loading="lazy" src="img/image5.webp" alt="">
 										<span>Conducting research to study seas and oceans</span>
 									</div>
-									<div class="block-descr-bottom__column">
+									<div class="block-descr-bottom__column" data-watch data-watch-once>
 										<img loading="lazy" src="img/image6.webp" alt="">
-										<span>Implementing AI-driven technologies to understand environmental issues</span>
+										<span>Implementing AI-driven technologies to understand environmental
+											issues</span>
 									</div>
-									<div class="block-descr-bottom__column">
+									<div class="block-descr-bottom__column" data-watch data-watch-once>
 										<img loading="lazy" src="img/image7.webp" alt="">
 										<span>Contributing to ocean cleanup and pollution prevention</span>
 									</div>
-									<div class="block-descr-bottom__column">
+									<div class="block-descr-bottom__column" data-watch data-watch-once>
 										<img loading="lazy" src="img/image8.webp" alt="">
 										<span>Building eco-communities with responsible worldview</span>
 									</div>
 								</div>
 							</div>
-							<div class="block-descr-bottom__icons">
+							<div class="block-descr-bottom__icons" data-watch data-watch-once>
 								<svg class="rotating-letters" width="275" height="278" viewBox="0 0 275 278" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<g filter="url(#filter0_d_1_988)">
 										<path d="M26.5852 107.374L13.328 96.7427L14.3296 93.8302L31.3216 93.6018L30.2627 96.6808L17.7198 96.5548L16.8928 96.4565L17.6398 96.9228L22.4199 100.544L22.7501 100.937L22.8159 100.611L23.3596 99.0295C23.4979 98.6273 23.728 98.3303 24.0499 98.1385C24.3741 97.9399 24.7313 97.8145 25.1214 97.7626C25.5139 97.7037 25.8794 97.6782 26.2179 97.686L24.6653 102.2L27.594 104.441L26.5852 107.374Z" fill="white" />
@@ -1346,42 +1350,133 @@
 					</div>
 				</div>
 
-				<div class="block-projects">
-					<div class="container">
-						<div class="block-projects__content">
-							<h2 class="title2">Eco Clean Ocean Projects</h2>
-							<div class="block-projects__body">
-								<div class="block-projects__column">
-									<div class="block-projects__top">
-										<div class="block-projects__number">01</div>
-										<div class="block-projects__title">
-											MONAECO Ecosystem
+				<div data-watch="navigator" class="block-projects">
+					<div class="block-projects__content">
+						<h2 class="title2" data-watch data-watch-once>Eco Clean Ocean Projects</h2>
+						<div class="block-projects__body">
+							<div class="container">
+								<div class="block-projects__columns1">
+									<div class="block-projects__column main-column main-column1" data-watch data-watch-once>
+										<div class="block-projects__top" data-watch data-watch-once>
+											<div class="block-projects__number" data-watch data-watch-once>01</div>
+											<div class="block-projects__title" data-watch data-watch-once>
+												MONAECO Ecosystem
+											</div>
 										</div>
+										<div class="block-projects__items">
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														The MONAECO Ecosystem connects scientific and business
+														communities,
+														organizations, governments, environmental projects,
+														researchers,
+														experts, and individuals, providing unified access to a
+														semantic
+														network
+														of ecological knowledge.
+													</p>
+													<p>
+														MONAECO enables community members to communicate and share
+														expertise
+														in
+														their native languages—eliminating cultural and linguistic
+														barriers
+														to
+														unite efforts
+													</p>
+												</div>
+												<div class="block-projects__text text-mob" data-watch data-watch-once>
+													<p>
+														Through its proprietary linguistic processing technology,
+														MONAECO
+														integrates ecological knowledge, innovative technologies,
+														best
+														practices, field experience, creative solutions into a
+														cohesive
+														semantic
+														network.
+													</p>
+													<p>
+														The system adapts content and meanings across languages,
+														allowing
+														users
+														worldwide to engage in natural-language communication. This
+														breakthrough
+														deepens collective understanding of environmental challenges
+														and
+														their
+														consequences
+													</p>
+												</div>
+												<div class="block-projects__buttons" data-watch data-watch-once>
+													<a download="#" href="./" class="btn btn-orange">
+														<span>Download presentation</span>
+														<svg aria-hidden="true" width="22" height="22">
+															<use xlink:href="img/sprite.svg#pdf"></use>
+														</svg>
+													</a>
+													<a href="./" class="btn btn-link">
+														<span>Read memorandum</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														Through its proprietary linguistic processing technology,
+														MONAECO
+														integrates ecological knowledge, innovative technologies,
+														best
+														practices, field experience, creative solutions into a
+														cohesive
+														semantic
+														network.
+													</p>
+													<p>
+														The system adapts content and meanings across languages,
+														allowing
+														users
+														worldwide to engage in natural-language communication. This
+														breakthrough
+														deepens collective understanding of environmental challenges
+														and
+														their
+														consequences
+													</p>
+												</div>
+											</div>
+										</div>
+										<img src="img/image9.webp" alt="" class="block-projects__pic1" data-watch data-watch-once>
 									</div>
-									<div class="block-projects__items">
-										<div class="block-projects__item">
-											<div class="block-projects__text">
+									<div class="block-projects__column column2 column-top" data-watch data-watch-once>
+										<div class="block-projects__item" data-watch data-watch-once>
+											<div class="block-projects__name" data-watch data-watch-once>
+												Knowledge modules of scientific and educational organizations
+											</div>
+											<div class="block-projects__text" data-watch data-watch-once>
 												<p>
-													The MONAECO Ecosystem connects scientific and business communities,
-													organizations, governments, environmental projects, researchers,
-													experts, and individuals, providing unified access to a semantic network
-													of ecological knowledge.
+													These modules contain information on ecology, environmentally
+													responsible technologies and practices, scientific articles,
+													research
+													results, environmental monitoring data, and much more.
 												</p>
 												<p>
-													MONAECO enables community members to communicate and share expertise in
-													their native languages—eliminating cultural and linguistic barriers to
-													unite efforts
+													They are created jointly with universities, research institutes,
+													and
+													other organizations, are regularly updated, and are available to
+													all
+													users and members of the eco-community in the requested language
 												</p>
 											</div>
-											<div class="block-projects__buttons">
-												<a download="#" href="./" class="btn btn-orange">
-													<span>Download presentation</span>
-													<svg aria-hidden="true" width="22" height="22">
-														<use xlink:href="img/sprite.svg#pdf"></use>
-													</svg>
-												</a>
-												<a href="./" class="btn btn-link">
-													<span>Read memorandum</span>
+											<div class="block-projects__buttons" data-watch data-watch-once>
+												<a href="./" class="btn btn-blue">
+													<span>Submit a request<br> to create a module</span>
 													<div class="btn__icon">
 														<svg aria-hidden="true" width="7" height="10">
 															<use xlink:href="img/sprite.svg#arrow2"></use>
@@ -1390,32 +1485,678 @@
 												</a>
 											</div>
 										</div>
-										<div class="block-projects__item">
-											<div class="block-projects__text">
+									</div>
+									<div class="block-projects__column column2" data-watch data-watch-once>
+										<div class="block-projects__item" data-watch data-watch-once>
+											<div class="block-projects__name" data-watch data-watch-once>
+												Eco-representation of commercial organizations and administrative
+												structures
+											</div>
+											<div class="block-projects__text" data-watch data-watch-once>
 												<p>
-													Through its proprietary linguistic processing technology, MONAECO
-													integrates ecological knowledge, innovative technologies, best
-													practices, field experience, creative solutions into a cohesive semantic
-													network.
+													The MONAECO eco-representation provides commercial companies
+													with an
+													opportunity to highlight the environmentally beneficial
+													properties
+													of
+													their technologies, products, components and services at all
+													stages
+													from
+													production to disposal. This gives companies competitive
+													advantages
+													when
+													their goods and services are chosen by environmentally
+													responsible
+													consumers. Consumers receive all the environmental information
+													they
+													need
+													about companies, products and services
 												</p>
-												<p>
-													The system adapts content and meanings across languages, allowing users
-													worldwide to engage in natural-language communication. This breakthrough
-													deepens collective understanding of environmental challenges and their
-													consequences
-												</p>
+											</div>
+											<div class="block-projects__buttons" data-watch data-watch-once>
+												<a href="./" class="btn btn-blue">
+													<span>Submit a request to<br> showcase your products</span>
+													<div class="btn__icon">
+														<svg aria-hidden="true" width="7" height="10">
+															<use xlink:href="img/sprite.svg#arrow2"></use>
+														</svg>
+													</div>
+												</a>
 											</div>
 										</div>
 									</div>
-									<img src="img/image9.webp" alt="" class="block-projects__pic1">
+								</div>
+							</div>
+							<div class="block-projects__columns2">
+								<img loading="lazy" src="img/image10.webp" alt="" class="block-projects__bg1" data-watch data-watch-once>
+								<div class="container">
+									<div class="block-projects__column main-column main-column2" data-watch data-watch-once>
+										<img loading="lazy" src="img/image20.webp" alt="" class="block-projects__pic2" data-watch data-watch-once>
+										<div class="block-projects__top" data-watch data-watch-once>
+											<div class="block-projects__number" data-watch data-watch-once>02</div>
+											<div class="block-projects__title" data-watch data-watch-once>
+												Digital Analytical Platform DIGIDIVE
+											</div>
+										</div>
+										<div class="block-projects__items">
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__name" data-watch data-watch-once>
+													Creation of "smart" models and "digital twins" of seas and
+													oceans
+												</div>
+												<div class="block-projects__text text-mob" data-watch data-watch-once>
+													<p>
+														Through its proprietary linguistic processing technology,
+														MONAECO
+														integrates ecological knowledge, innovative technologies,
+														best
+														practices, field experience, creative solutions into a
+														cohesive
+														semantic
+														network.
+													</p>
+													<p>
+														The system adapts content and meanings across languages,
+														allowing
+														users
+														worldwide to engage in natural-language communication. This
+														breakthrough
+														deepens collective understanding of environmental challenges
+														and
+														their
+														consequences
+													</p>
+												</div>
+												<div class="block-projects__buttons" data-watch data-watch-once>
+													<a href="./" class="btn btn-orange">
+														<span>Request presentation</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														A digital analytical platform capable of modeling the state
+														of
+														river,
+														sea and ocean ecosystems, as well as predicting changes in
+														them
+														taking
+														into account the influence of all known parameters
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="block-projects__columns3">
+								<div class="container">
+									<div class="block-projects__column main-column main-column3" data-watch data-watch-once>
+										<img loading="lazy" src="img/image11.webp" alt="" class="block-projects__pic3" data-watch data-watch-once>
+										<div class="block-projects__top" data-watch data-watch-once>
+											<div class="block-projects__number" data-watch data-watch-once>03</div>
+											<div class="block-projects__title" data-watch data-watch-once>
+												Expeditionary journeys for researching rivers, seas and oceans
+											</div>
+										</div>
+										<div class="block-projects__items">
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														Every journey on water adds to our knowledge of the World
+														Ocean.
+														This contributes to a better understanding of the origin of
+														pollution, the dynamics of its spread and the damage caused.
+													</p>
+												</div>
+												<div class="block-projects__list mob" data-watch data-watch-once>
+													<div class="block-projects__list-title" data-watch data-watch-once>
+														Main research directions:
+													</div>
+													<ul>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Formation and growth of garbage pollution
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Increase in "dead" zones with reduced oxygen content
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Accumulation of persistent organic pollutants
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Increasing ocean acidification
+														</li>
+													</ul>
+												</div>
+												<div class="block-projects__buttons" data-watch data-watch-once>
+													<a href="./" class="btn btn-orange">
+														<span>Submit application to participate</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+													<a href="./" class="btn btn-blue">
+														<span>Submit application for funding</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__list" data-watch data-watch-once>
+													<div class="block-projects__list-title" data-watch data-watch-once>
+														Main research directions:
+													</div>
+													<ul>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Formation and growth of garbage pollution
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Increase in "dead" zones with reduced oxygen content
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Accumulation of persistent organic pollutants
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Increasing ocean acidification
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="block-projects__columns4">
+								<img loading="lazy" src="img/image12.webp" alt="" class="block-projects__bg2" data-watch data-watch-once>
+								<div class="container">
+									<div class="block-projects__column main-column main-column2" data-watch data-watch-once>
+										<div class="block-projects__top" data-watch data-watch-once>
+											<div class="block-projects__number" data-watch data-watch-once>04</div>
+											<div class="block-projects__title" data-watch data-watch-once>
+												Rain Tower
+											</div>
+										</div>
+										<div class="block-projects__items">
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__name" data-watch data-watch-once>
+													A structure for creating and managing precipitation in arid
+													regions
+													of
+													the planet
+												</div>
+												<div class="block-projects__text text-mob" data-watch data-watch-once>
+													<p>
+														Autonomous complex converting seawater into rain clouds.
+													</p>
+													<p>
+														The built-in aerothermal power plant provides all processes
+														from
+														managing the saturation of air masses with moisture and
+														forming
+														rain
+														clouds to delivering them to a specified altitude for
+														irrigating
+														target areas
+													</p>
+												</div>
+												<div class="block-projects__buttons" data-watch data-watch-once>
+													<a href="./" class="btn btn-orange">
+														<span>Request presentation</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														Autonomous complex converting seawater into rain clouds.
+													</p>
+													<p>
+														The built-in aerothermal power plant provides all processes
+														from
+														managing the saturation of air masses with moisture and
+														forming
+														rain
+														clouds to delivering them to a specified altitude for
+														irrigating
+														target areas
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="block-projects__columns5">
+								<div class="container">
+									<div class="block-projects__column main-column main-column2" data-watch data-watch-once>
+										<div class="block-projects__top" data-watch data-watch-once>
+											<div class="block-projects__number" data-watch data-watch-once>05</div>
+											<div class="block-projects__title" data-watch data-watch-once>
+												Hydro Power Tower (HYPOT)
+											</div>
+										</div>
+										<div class="block-projects__items">
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__name" data-watch data-watch-once>
+													Underwater power plants
+												</div>
+												<div class="block-projects__text text-mob" data-watch data-watch-once>
+													<p>
+														Project for construction of underwater cyclonic
+														hydroelectric
+														power
+														plants by converting natural currents in aquatic ecosystems
+														into
+														"green energy"
+													</p>
+												</div>
+												<div class="block-projects__buttons" data-watch data-watch-once>
+													<a href="./" class="btn btn-orange">
+														<span>Request presentation</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														Project for construction of underwater cyclonic
+														hydroelectric
+														power
+														plants by converting natural currents in aquatic ecosystems
+														into
+														"green energy"
+													</p>
+												</div>
+											</div>
+										</div>
+										<img loading="lazy" src="img/image13.webp" alt="" class="block-projects__pic4" data-watch data-watch-once>
+										<img loading="lazy" src="img/image13-mob.webp" alt="" class="block-projects__pic4 mob" data-watch data-watch-once>
+									</div>
+								</div>
+							</div>
+							<div class="block-projects__columns6">
+								<img loading="lazy" src="img/image14.webp" alt="" class="block-projects__bg3" data-watch data-watch-once>
+								<div class="container">
+									<div class="block-projects__column main-column main-column2" data-watch data-watch-once>
+										<div class="block-projects__top" data-watch data-watch-once>
+											<div class="block-projects__number" data-watch data-watch-once>06</div>
+											<div class="block-projects__title" data-watch data-watch-once>
+												Clean Water Dual Green Initiative
+											</div>
+										</div>
+										<div class="block-projects__items">
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__name" data-watch data-watch-once>
+													Collection and recycling of surface water pollution
+												</div>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+														do
+														eiusmod tempor incididunt ut labore et dolore magna aliqua.
+														Ut
+														enim
+														ad minim veniam, quis nostrud exercitation ullamco
+													</p>
+												</div>
+												<div class="block-projects__buttons" data-watch data-watch-once>
+													<a href="./" class="btn btn-orange">
+														<span>Request presentation</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="block-projects__item" data-watch data-watch-once>
+												<a href="files/videos/video.mp4" data-fancybox="video1" class="block-projects__video" data-watch data-watch-once>
+													<img loading="lazy" src="img/image15.webp" alt="" class="block-projects__video-image" data-watch data-watch-once>
+													<div class="block-projects__play" data-watch data-watch-once>
+														<img loading="lazy" src="img/icons/play.svg" alt="" data-watch data-watch-once>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="block-projects__columns7">
+								<div class="container">
+									<div class="block-projects__column main-column main-column2" data-watch data-watch-once>
+										<div class="block-projects__top" data-watch data-watch-once>
+											<div class="block-projects__number" data-watch data-watch-once>07</div>
+											<div class="block-projects__title" data-watch data-watch-once>
+												ECO First Aid Kits
+											</div>
+										</div>
+										<div class="block-projects__items">
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__name" data-watch data-watch-once>
+													Detection, localization and elimination of oil and petroleum
+													product
+													spills
+												</div>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														Oil and petroleum product spills, pollution of drinking
+														water
+														sources require prompt intervention to prevent serious
+														consequences
+														of water resource pollution. Kits in marine containers are
+														designed
+														for detection, localization and elimination of oil and
+														petroleum
+														product spills
+													</p>
+												</div>
+												<div class="block-projects__buttons" data-watch data-watch-once>
+													<a href="./" class="btn btn-orange">
+														<span>Request presentation</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="block-projects__item" data-watch data-watch-once>
+											</div>
+										</div>
+										<img loading="lazy" src="img/image16.webp" alt="" class="block-projects__pic5" data-watch data-watch-once>
+									</div>
+								</div>
+							</div>
+							<div class="block-projects__columns8">
+								<div class="container">
+									<div class="block-projects__column main-column main-column2" data-watch data-watch-once>
+										<div class="block-projects__top" data-watch data-watch-once>
+											<div class="block-projects__number" data-watch data-watch-once>08</div>
+											<div class="block-projects__title" data-watch data-watch-once>
+												Accessible Drinking Water
+											</div>
+										</div>
+										<div class="block-projects__items">
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__name" data-watch data-watch-once>
+													Geoecological and hydrogeological research, as well as works for
+													water
+													supply
+												</div>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														One of humanity's global problems is the shortage of
+														drinking
+														water
+														due to climate change, pollution of freshwater ecosystems
+														and
+														lack
+														of infrastructure needed to extract fresh water. To improve
+														water
+														quality, increase the efficiency of water resource use and
+														protect
+														aquatic ecosystems, we conduct geoecological and
+														hydrogeological
+														research, as well as works for water supply
+													</p>
+												</div>
+												<div class="block-projects__buttons" data-watch data-watch-once>
+													<a href="./" class="btn btn-orange">
+														<span>Request presentation</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="block-projects__item" data-watch data-watch-once>
+											</div>
+										</div>
+										<img loading="lazy" src="img/image17.webp" alt="" class="block-projects__pic6" data-watch data-watch-once>
+									</div>
+								</div>
+							</div>
+							<div class="block-projects__columns9">
+								<div class="container">
+									<div class="block-projects__column main-column main-column3" data-watch data-watch-once>
+										<div class="block-projects__top" data-watch data-watch-once>
+											<div class="block-projects__number" data-watch data-watch-once>09</div>
+											<div class="block-projects__title" data-watch data-watch-once>
+												MONAECO LAB - Kits for ecological monitoring in education
+											</div>
+										</div>
+										<div class="block-projects__items">
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__text" data-watch data-watch-once>
+													<p>
+														A laboratory kit that makes the process of studying the
+														ecology
+														of
+														real ecosystems (water bodies, forests, etc.) interesting
+														and
+														exciting. Modeling various ecosystem states teaches how to
+														apply
+														a
+														set of measures and means to prevent or eliminate pollution.
+													</p>
+												</div>
+												<div class="block-projects__list mob" data-watch data-watch-once>
+													<div class="block-projects__list-title" data-watch data-watch-once>
+														Main research directions:
+													</div>
+													<ul>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Parameter measurement
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Data collection and transmission
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Condition assessment
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															State modeling
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Change prediction
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Pollution detection
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Development of solutions to prevent negative
+															environmental
+															situations
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Assessment of adverse consequences of state changes
+														</li>
+													</ul>
+												</div>
+												<div class="block-projects__buttons" data-watch data-watch-once>
+													<a href="./" class="btn btn-orange">
+														<span>Submit application to participate</span>
+														<div class="btn__icon">
+															<svg aria-hidden="true" width="7" height="10">
+																<use xlink:href="img/sprite.svg#arrow2"></use>
+															</svg>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="block-projects__item" data-watch data-watch-once>
+												<div class="block-projects__list" data-watch data-watch-once>
+													<div class="block-projects__list-title" data-watch data-watch-once>
+														Main research directions:
+													</div>
+													<ul>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Parameter measurement
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Data collection and transmission
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Condition assessment
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															State modeling
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Change prediction
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Pollution detection
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Development of solutions to prevent negative
+															environmental
+															situations
+														</li>
+														<li data-watch data-watch-once>
+															<div class="block-projects__list-icon" data-watch data-watch-once></div>
+															Assessment of adverse consequences of state changes
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<img loading="lazy" src="img/image18.webp" alt="" class="block-projects__pic7" data-watch data-watch-once>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-			</main>
+				<div class="block-forms" data-watch="navigator" data-watch-once>
+					<img loading="lazy" src="img/image19.webp" alt="" class="block-forms__bg" data-watch data-watch-once>
+					<img loading="lazy" src="img/image19-mob.webp" alt="" class="block-forms__bg-mob" data-watch data-watch-once>
+					<div class="container">
+						<div class="block-forms__content">
+							<h2 class="title2" data-watch data-watch-once>
+								Help us make the Planet clean
+							</h2>
+							<p data-watch data-watch-once>
+								You can contribute - become a member of the MONAECO community, stay updated on our
+								events
+							</p>
+							<form action="#" class="block-forms__form">
+								<div class="block-forms__input" data-watch data-watch-once>
+									<img loading="lazy" src="img/icons/mail.svg" alt="">
+									<input data-required="email" autocomplete="off" type="text" name="form[]" placeholder="Enter your email address">
+								</div>
+								<button type="submit" class="btn btn-orange" data-watch data-watch-once>
+									<span>Subscribe</span>
+									<div class="btn__icon">
+										<svg aria-hidden="true" width="7" height="10">
+											<use xlink:href="img/sprite.svg#arrow2"></use>
+										</svg>
+									</div>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+
 		</div>
+		<footer class="footer" data-watch data-watch-once>
+			<img src="img/icons/bg-footer.svg" alt="" class="footer__bg">
+			<img src="img/icons/bg-footer2.svg" alt="" class="footer__bg-mob">
+			<div class="container">
+				<div class="footer__content">
+					<div class="footer-top">
+						<a href="./" class="footer-top__logo" data-watch data-watch-once>
+							<img src="img/icons/logo.svg" alt="">
+						</a>
+						<div class="footer-top__menu" data-watch data-watch-once>
+							<ul>
+								<li>
+									<a href="./" data-goto=".block-intro" data-goto-header>about</a>
+								</li>
+								<li>
+									<a href="./" data-goto=".block-projects" data-goto-header>projects</a>
+								</li>
+								<li>
+									<a href="./" data-goto=".block-descr-top" data-goto-header>news</a>
+								</li>
+								<li>
+									<a href="./" data-goto=".block-descr-bottom" data-goto-header>help us</a>
+								</li>
+								<li>
+									<a href="./" data-goto=".block-forms" data-goto-header>Contacts</a>
+								</li>
+							</ul>
+						</div>
+						<div class="footer-top__right" data-watch data-watch-once>
+							<a href="./" class="btn btn-transparent"><span>Donate now</span></a>
+						</div>
+					</div>
+					<div class="footer-bottom" data-watch data-watch-once>
+						<div class="footer-bottom__text" data-watch data-watch-once>
+							© Eco Clean Ocean 2025 All rights reserved
+						</div>
+						<a href="./" class="footer-bottom__text" data-watch data-watch-once>
+							Политика конфиденциальности
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+		</main>
+
+		</div>
+		<script src="js/dynamic_adapt.js"></script>
+		<script src="js/fancybox.umd.js"></script>
 		<script src="js/scripts.js"></script>
 	</body>
 
