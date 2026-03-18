@@ -1112,6 +1112,9 @@ a {
   display: flex;
 }
 .header__menu ul li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   font-family: var(--second-family);
   font-weight: 800;
   font-size: 18px;
@@ -1334,6 +1337,7 @@ a {
 .btn span {
   position: relative;
   z-index: 2;
+  margin-bottom: -1px;
 }
 .btn svg {
   fill: #fff;
@@ -4938,6 +4942,9 @@ a {
   display: flex;
 }
 .footer-top__menu ul li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   font-family: var(--second-family);
   font-weight: 800;
   font-size: 18px;
