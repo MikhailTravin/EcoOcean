@@ -965,6 +965,12 @@ a {
 .menu-open .header {
   background-color: #011831;
 }
+.header._header-scroll {
+  background-color: #011831;
+}
+.header._header-scroll .header__content {
+  padding: 15px 0px;
+}
 .header .container {
   max-width: 1805px;
   padding: 0px 25px 0px 20px;
@@ -985,6 +991,8 @@ a {
       -ms-flex-pack: justify;
           justify-content: space-between;
   gap: 30px;
+  -webkit-transition: padding 0.3s;
+  transition: padding 0.3s;
   padding: 50px 0px;
 }
 @media (max-width: 992px) {
@@ -994,9 +1002,7 @@ a {
   }
 }
 .header__logo {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 120px;
-          flex: 0 0 120px;
+  width: 120px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1007,16 +1013,12 @@ a {
 }
 @media (max-width: 992px) {
   .header__logo {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 89px;
-            flex: 0 0 89px;
+    width: 89px;
   }
 }
 @media (max-width: 359px) {
   .header__logo {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 80px;
-            flex: 0 0 80px;
+    width: 80px;
   }
 }
 .header__menu {
@@ -1245,6 +1247,9 @@ body {
   line-height: 120%;
   background: #011831;
   padding: 0px 0px 0px 0px !important;
+}
+.intro-open body {
+  overflow: hidden;
 }
 body.hide-scrollbar {
   margin: 0px 0px 0px 0px !important;
@@ -1672,7 +1677,10 @@ a {
 }
 
 .block-intro {
-  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 15;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1680,10 +1688,15 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 202px 0px 250px 0px;
-  position: relative;
-  scroll-snap-align: start;
-  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.block-intro::-webkit-scrollbar {
+  display: none;
 }
 @media (max-width: 1200px) {
   .block-intro {
@@ -1697,21 +1710,25 @@ a {
   }
 }
 .block-intro .container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 0px 20px;
-  height: 100%;
-  overflow-y: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.block-intro .container::-webkit-scrollbar {
-  display: none;
 }
 .block-intro__bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100% - 50px);
+  height: 100%;
+  min-height: 100%;
   opacity: 0;
   -webkit-transition: opacity 1.5s ease-out;
   transition: opacity 1.5s ease-out;
@@ -1751,6 +1768,24 @@ a {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+.block-intro__contents {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  min-height: -webkit-min-content;
+  min-height: -moz-min-content;
+  min-height: min-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 80px;
+  position: relative;
+  padding: 202px 0px 250px 0px;
 }
 .block-intro__content {
   -webkit-box-flex: 1;
@@ -2012,6 +2047,42 @@ a {
             transform: rotate(360deg);
   }
 }
+.block-intro.intro-closed {
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  -webkit-transition: opacity 0.8s ease-in-out, visibility 0.8s, -webkit-transform 0.8s ease-in-out;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s, -webkit-transform 0.8s ease-in-out;
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0.8s;
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0.8s, -webkit-transform 0.8s ease-in-out;
+}
+
+.normal-sections {
+  position: relative;
+  z-index: 10;
+  margin-top: 100px;
+  -webkit-transition: margin-top 0.3s ease-out;
+  transition: margin-top 0.3s ease-out;
+}
+
+/* Скрываем normal-sections, когда интро открыто */
+.intro-open .normal-sections {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s linear 0.5s, opacity 0.5s ease;
+  transition: visibility 0s linear 0.5s, opacity 0.5s ease;
+}
+
+/* Показываем normal-sections, когда интро закрыто */
+.intro-closed .normal-sections {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: visibility 0s linear 0s, opacity 0.5s ease;
+  transition: visibility 0s linear 0s, opacity 0.5s ease;
+}
+
 .block-descr {
   position: relative;
   padding: 110px 0px 120px 0px;
@@ -2033,7 +2104,7 @@ a {
   left: 0;
   width: 100%;
   z-index: 5;
-  top: -47px;
+  top: -100px;
   height: 810px;
   display: block;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(30.29%, rgba(1, 24, 49, 0)), color-stop(89.9%, rgba(1, 24, 49, 0.95)), to(#011831));

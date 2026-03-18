@@ -1,11 +1,19 @@
 .block-intro {
-    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 15;
     display: flex;
     flex-direction: column;
-    padding: 202px 0px 250px 0px;
-    position: relative;
-    scroll-snap-align: start;
-    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     @media (max-width: 1200px) {
         padding: 200px 0px;
@@ -16,15 +24,10 @@
     }
 
     .container {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
         padding: 0px 20px;
-        height: 100%;
-
-        overflow-y: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        &::-webkit-scrollbar {
-            display: none;
-        }
     }
 
     // .block-intro__bg
@@ -34,7 +37,8 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: calc(100% - 50px);
+        height: 100%;
+        min-height: 100%;
         opacity: 0;
         transition: opacity 1.5s ease-out;
 
@@ -85,6 +89,16 @@
             height: 100%;
             object-fit: cover;
         }
+    }
+
+    &__contents {
+        flex: 1 1 auto;
+        min-height: min-content;
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+        position: relative;
+        padding: 202px 0px 250px 0px;
     }
 
     // .block-intro__content
@@ -292,6 +306,35 @@
     }
 }
 
+.block-intro.intro-closed {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0.8s;
+}
+
+.normal-sections {
+    position: relative;
+    z-index: 10;
+    margin-top: 100px;
+    transition: margin-top 0.3s ease-out;
+}
+
+/* Скрываем normal-sections, когда интро открыто */
+.intro-open .normal-sections {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.5s, opacity 0.5s ease;
+}
+
+/* Показываем normal-sections, когда интро закрыто */
+.intro-closed .normal-sections {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 0.5s ease;
+}
+
 //========================================================================================================================================================
 
 .block-descr {
@@ -314,7 +357,7 @@
         left: 0;
         width: 100%;
         z-index: 5;
-        top: -47px;
+        top: -100px;
         height: 810px;
         display: block;
         background: linear-gradient(0deg, rgba(1, 24, 49, 0) 30.29%, rgba(1, 24, 49, 0.95) 89.9%, #011831 100%);

@@ -6,6 +6,9 @@ body {
   line-height: 120%;
   background: #011831;
   padding: 0px 0px 0px 0px !important;
+  .intro-open & {
+    overflow: hidden;
+  }
   &.hide-scrollbar {
     margin: 0px 0px 0px 0px !important;
   }

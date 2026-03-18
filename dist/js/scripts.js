@@ -38,6 +38,8 @@ function functions_FLS(message) {
   }), 0);
 }
 
+let isMobile = { Android: function () { return navigator.userAgent.match(/Android/i); }, BlackBerry: function () { return navigator.userAgent.match(/BlackBerry/i); }, iOS: function () { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, Opera: function () { return navigator.userAgent.match(/Opera Mini/i); }, Windows: function () { return navigator.userAgent.match(/IEMobile/i); }, any: function () { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
+
 let _slideUp = (target, duration = 500, showmore = 0) => {
   if (!target.classList.contains("_slide")) {
     target.classList.add("_slide");
@@ -440,21 +442,6 @@ if (iconMenu) {
     }
   });
 }
-
-//========================================================================================================================================================
-
-// Добавление к шапке при скролле
-const header = document.querySelector('.header');
-if (header) {
-  window.addEventListener('scroll', function () {
-    if (window.scrollY > 0) {
-      header.classList.add('_header-scroll');
-    } else {
-      header.classList.remove('_header-scroll');
-    }
-  });
-}
-
 //========================================================================================================================================================
 
 //Наблюдатель
@@ -464,16 +451,37 @@ class ScrollWatcher {
       logging: true
     };
     this.config = Object.assign(defaultConfig, props);
-    this.observer;
+    this.observer = null;
+    this.isActive = true;
     !document.documentElement.classList.contains("watcher") ? this.scrollWatcherRun() : null;
   }
+
+  // Новый метод для перезапуска
+  restart() {
+    this.isActive = true;
+    this.scrollWatcherRun();
+  }
+
+  // Новый метод для полной остановки
+  stop() {
+    this.isActive = false;
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
+  }
+
   scrollWatcherUpdate() {
     this.scrollWatcherRun();
   }
+
   scrollWatcherRun() {
+    if (!this.isActive) return;
+
     document.documentElement.classList.add("watcher");
     this.scrollWatcherConstructor(document.querySelectorAll("[data-watch]"));
   }
+
   scrollWatcherConstructor(items) {
     if (items.length) {
       let uniqParams = uniqArray(Array.from(items).map((function (item) {
@@ -497,6 +505,7 @@ class ScrollWatcher {
       }));
     }
   }
+
   getScrollWatcherConfig(paramsWatch) {
     let configWatcher = {};
     if (document.querySelector(paramsWatch.root)) configWatcher.root = document.querySelector(paramsWatch.root); else if ("null" !== paramsWatch.root);
@@ -511,17 +520,24 @@ class ScrollWatcher {
     configWatcher.threshold = paramsWatch.threshold;
     return configWatcher;
   }
+
   scrollWatcherCreate(configWatcher) {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+
     this.observer = new IntersectionObserver(((entries, observer) => {
       entries.forEach((entry => {
         this.scrollWatcherCallback(entry, observer);
       }));
     }), configWatcher);
   }
+
   scrollWatcherInit(items, configWatcher) {
     this.scrollWatcherCreate(configWatcher);
     items.forEach((item => this.observer.observe(item)));
   }
+
   scrollWatcherIntersecting(entry, targetElement) {
     if (entry.isIntersecting) {
       !targetElement.classList.contains("_watcher-view") ? targetElement.classList.add("_watcher-view") : null;
@@ -529,9 +545,11 @@ class ScrollWatcher {
       targetElement.classList.contains("_watcher-view") ? targetElement.classList.remove("_watcher-view") : null;
     }
   }
+
   scrollWatcherOff(targetElement, observer) {
     observer.unobserve(targetElement);
   }
+
   scrollWatcherCallback(entry, observer) {
     const targetElement = entry.target;
     this.scrollWatcherIntersecting(entry, targetElement);
@@ -543,73 +561,223 @@ class ScrollWatcher {
     }));
   }
 }
+
 modules_flsModules.watcher = new ScrollWatcher({});
 
 //========================================================================================================================================================
 
-//Прокрутка к блоку
+Fancybox.bind("[data-fancybox]", {
+  // опции
+});
+
+//========================================================================================================================================================
+
+function initHeaderScroll() {
+  const header = document.querySelector('.header');
+  const introBlock = document.querySelector('.block-intro');
+
+  if (!header || !introBlock) return;
+
+  let ticking = false;
+
+  function updateHeaderScrollClass() {
+    const htmlElement = document.documentElement;
+
+    if (htmlElement.classList.contains('intro-open')) {
+      if (introBlock.scrollTop > 0) {
+        header.classList.add('_header-scroll');
+      } else {
+        header.classList.remove('_header-scroll');
+      }
+    } else {
+      if (window.scrollY > 0) {
+        header.classList.add('_header-scroll');
+      } else {
+        header.classList.remove('_header-scroll');
+      }
+    }
+
+    ticking = false;
+  }
+
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateHeaderScrollClass);
+      ticking = true;
+    }
+  }
+
+  introBlock.addEventListener('scroll', requestTick);
+  window.addEventListener('scroll', requestTick);
+
+  requestTick();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initHeaderScroll);
+} else {
+  initHeaderScroll();
+}
+
+//========================================================================================================================================================
+
 let gotoBlock = (targetBlock, noHeader = false, speed = 500, offsetTop = 0) => {
   const targetBlockElement = document.querySelector(targetBlock);
+  const introBlock = document.querySelector('.block-intro');
+  const normalSections = document.querySelector('.normal-sections');
+  const htmlElement = document.documentElement;
 
   if (!targetBlockElement) {
     console.warn(`Element ${targetBlock} not found`);
     return;
   }
 
-  let headerItem = '';
-  let headerItemHeight = 0;
+  const isTargetIntro = targetBlockElement.classList.contains('block-intro');
 
-  if (noHeader) {
-    headerItem = 'header.header';
-    const headerElement = document.querySelector(headerItem);
-    if (headerElement) {
-      if (!headerElement.classList.contains('_header-scroll')) {
-        headerElement.style.cssText = `transition-duration: 0s;`;
-        headerElement.classList.add('_header-scroll');
-        headerItemHeight = headerElement.offsetHeight;
-        headerElement.classList.remove('_header-scroll');
-        setTimeout(() => {
-          headerElement.style.cssText = ``;
-        }, 0);
+  const addHeaderScrollClass = () => {
+    const header = document.querySelector('.header');
+    if (header) header.classList.add('_header-scroll');
+  };
+
+  const removeHeaderScrollClass = () => {
+    const header = document.querySelector('.header');
+    if (header) header.classList.remove('_header-scroll');
+  };
+
+  const positionNormalSections = () => {
+    if (normalSections && introBlock) {
+      normalSections.style.transform = `translateY(${introBlock.offsetHeight}px)`;
+    }
+  };
+
+  const resetNormalSectionsPosition = () => {
+    if (normalSections) {
+      normalSections.style.transform = '';
+    }
+  };
+
+  const dispatchWatcherEvent = (isIntersecting) => {
+    const event = new CustomEvent('watcherCallback', {
+      detail: {
+        entry: {
+          target: introBlock,
+          isIntersecting
+        }
+      }
+    });
+    document.dispatchEvent(event);
+  };
+
+  if (isTargetIntro) {
+    if (htmlElement.classList.contains('intro-closed')) {
+      if (typeof window.openIntro === 'function') {
+        window.openIntro(() => {
+          introBlock.scrollTop = 0;
+          positionNormalSections();
+          removeHeaderScrollClass();
+
+          requestAnimationFrame(() => {
+            dispatchWatcherEvent(true);
+          });
+        });
       } else {
-        headerItemHeight = headerElement.offsetHeight;
+        introBlock.scrollTop = 0;
+        positionNormalSections();
+        removeHeaderScrollClass();
+      }
+    } else {
+      introBlock.scrollTop = 0;
+      positionNormalSections();
+      removeHeaderScrollClass();
+
+      requestAnimationFrame(() => {
+        dispatchWatcherEvent(true);
+      });
+    }
+    return;
+  }
+
+  function performScroll() {
+    let headerItem = '';
+    let headerItemHeight = 0;
+
+    if (noHeader) {
+      headerItem = 'header.header';
+      const headerElement = document.querySelector(headerItem);
+      if (headerElement) {
+        if (!headerElement.classList.contains('_header-scroll')) {
+          headerElement.style.cssText = `transition-duration: 0s;`;
+          headerElement.classList.add('_header-scroll');
+          headerItemHeight = headerElement.offsetHeight;
+          headerElement.classList.remove('_header-scroll');
+          requestAnimationFrame(() => {
+            headerElement.style.cssText = ``;
+          });
+        } else {
+          headerItemHeight = headerElement.offsetHeight;
+        }
       }
     }
-  }
 
-  if (document.documentElement.classList.contains("menu-open")) {
-    if (typeof menuClose === 'function') {
-      menuClose();
+    addHeaderScrollClass();
+    resetNormalSectionsPosition();
+
+    if (typeof SmoothScroll !== 'undefined') {
+      let options = {
+        speedAsDuration: true,
+        speed: speed,
+        header: headerItem,
+        offset: offsetTop,
+        easing: 'easeOutQuad',
+      };
+      new SmoothScroll().animateScroll(targetBlockElement, '', options);
+    } else {
+      let targetBlockElementPosition = targetBlockElement.getBoundingClientRect().top + window.scrollY;
+
+      if (headerItemHeight) {
+        targetBlockElementPosition -= headerItemHeight;
+      }
+
+      if (offsetTop) {
+        targetBlockElementPosition -= offsetTop;
+      }
+
+      window.scrollTo({
+        top: targetBlockElementPosition,
+        behavior: "smooth"
+      });
     }
+
+    requestAnimationFrame(addHeaderScrollClass);
   }
 
-  if (typeof SmoothScroll !== 'undefined') {
-    let options = {
-      speedAsDuration: true,
-      speed: speed,
-      header: headerItem,
-      offset: offsetTop,
-      easing: 'easeOutQuad',
-    };
-    new SmoothScroll().animateScroll(targetBlockElement, '', options);
+  if (htmlElement.classList.contains('intro-open')) {
+    if (typeof window.closeIntro === 'function') {
+      window.closeIntro(() => {
+        introBlock.addEventListener('transitionend', function onTransitionEnd() {
+          introBlock.removeEventListener('transitionend', onTransitionEnd);
+
+          performScroll();
+
+          if (typeof forceUpdateNavigation === 'function') {
+            requestAnimationFrame(() => {
+              forceUpdateNavigation();
+            });
+          }
+        });
+      });
+    } else {
+      performScroll();
+    }
   } else {
-    let targetBlockElementPosition = targetBlockElement.getBoundingClientRect().top + window.scrollY;
-
-    if (headerItemHeight) {
-      targetBlockElementPosition -= headerItemHeight;
-    }
-
-    if (offsetTop) {
-      targetBlockElementPosition -= offsetTop;
-    }
-
-    window.scrollTo({
-      top: targetBlockElementPosition,
-      behavior: "smooth"
-    });
+    performScroll();
   }
 };
+
 function pageNavigation() {
+  document.removeEventListener("click", pageNavigationAction);
+  document.removeEventListener("watcherCallback", pageNavigationAction);
+
   document.addEventListener("click", pageNavigationAction);
   document.addEventListener("watcherCallback", pageNavigationAction);
 
@@ -624,7 +792,10 @@ function pageNavigation() {
         const gotoSpeed = gotoLink.dataset.gotoSpeed ? parseInt(gotoLink.dataset.gotoSpeed) : 500;
         const offsetTop = gotoLink.dataset.gotoTop ? parseInt(gotoLink.dataset.gotoTop) : 0;
 
-        if (window.modules_flsModules && modules_flsModules.fullpage) {
+        const header = document.querySelector('.header');
+        if (header) header.classList.add('_header-scroll');
+
+        if (window.modules_flsModules?.fullpage) {
           const fullpageSection = document.querySelector(`${gotoLinkSelector}`)?.closest('[data-fp-section]');
           const fullpageSectionId = fullpageSection ? +fullpageSection.dataset.fpId : null;
 
@@ -644,263 +815,298 @@ function pageNavigation() {
       const entry = e.detail.entry;
       const targetElement = entry.target;
 
-      if (targetElement.dataset.watch === 'navigator') {
-        document.querySelectorAll('[data-goto]._navigator-active').forEach(el => {
-          el.classList.remove('_navigator-active');
-        });
-
-        const navigatorLinks = findNavigatorLinks(targetElement);
-        navigatorLinks.forEach(link => {
-          if (entry.isIntersecting) {
-            link.classList.add('_navigator-active');
-          } else {
-            link.classList.remove('_navigator-active');
-          }
-        });
+      if (targetElement?.dataset?.watch === 'navigator') {
+        updateActiveNavigation(targetElement, entry.isIntersecting);
       }
+    }
+  }
+
+  function updateActiveNavigation(element, isIntersecting) {
+    const allLinksForElement = findNavigatorLinks(element);
+
+    if (isIntersecting) {
+      document.querySelectorAll('[data-goto]._navigator-active').forEach(el => {
+        el.classList.remove('_navigator-active');
+      });
+
+      allLinksForElement.forEach(link => {
+        link.classList.add('_navigator-active');
+      });
+    } else {
+      allLinksForElement.forEach(link => {
+        link.classList.remove('_navigator-active');
+      });
     }
   }
 
   function findNavigatorLinks(element) {
     const links = [];
+    const selectors = [];
 
     if (element.id) {
-      const idLinks = document.querySelectorAll(`[data-goto="#${element.id}"]`);
-      links.push(...idLinks);
+      selectors.push(`#${element.id}`);
     }
 
-    if (element.classList.length) {
-      element.classList.forEach(className => {
-        const classLinks = document.querySelectorAll(`[data-goto=".${className}"]`);
-        links.push(...classLinks);
+    if (element.classList?.length) {
+      Array.from(element.classList).forEach(className => {
+        if (className &&
+          !className.startsWith('_') &&
+          className !== 'container' &&
+          className !== 'block-intro__content' &&
+          className !== 'block-intro__bg') {
+          selectors.push(`.${className}`);
+        }
       });
     }
 
-    return links;
+    selectors.forEach(selector => {
+      const foundLinks = document.querySelectorAll(`[data-goto="${selector}"]`);
+      foundLinks.forEach(link => links.push(link));
+    });
+
+    return [...new Set(links)];
   }
 }
-pageNavigation();
 
-//========================================================================================================================================================
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', pageNavigation);
+} else {
+  pageNavigation();
+}
 
-Fancybox.bind("[data-fancybox]", {
-  // опции
-});
+function forceUpdateNavigation() {
+  const watchElements = document.querySelectorAll('[data-watch="navigator"]');
+  let ticking = false;
 
-//========================================================================================================================================================
-/*
+  const checkVisibility = () => {
+    const htmlElement = document.documentElement;
+    const introBlock = document.querySelector('.block-intro');
+
+    if (htmlElement.classList.contains('intro-open') && introBlock) {
+      const event = new CustomEvent('watcherCallback', {
+        detail: {
+          entry: {
+            target: introBlock,
+            isIntersecting: true
+          }
+        }
+      });
+      document.dispatchEvent(event);
+      return;
+    }
+
+    if (htmlElement.classList.contains('intro-closed')) {
+      watchElements.forEach(element => {
+        if (element === introBlock) return;
+
+        const rect = element.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+        if (isVisible) {
+          const event = new CustomEvent('watcherCallback', {
+            detail: {
+              entry: {
+                target: element,
+                isIntersecting: true
+              }
+            }
+          });
+          document.dispatchEvent(event);
+        }
+      });
+    }
+
+    ticking = false;
+  };
+
+  const requestTick = () => {
+    if (!ticking) {
+      requestAnimationFrame(checkVisibility);
+      ticking = true;
+    }
+  };
+
+  window.removeEventListener('scroll', requestTick);
+  window.removeEventListener('resize', requestTick);
+
+  window.addEventListener('scroll', requestTick);
+  window.addEventListener('resize', requestTick);
+
+  requestTick();
+
+  if (document.readyState === 'complete') {
+    requestTick();
+  } else {
+    window.addEventListener('load', requestTick, { once: true });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  const intro = document.querySelector('.block-intro');
-  const introContainer = document.querySelector('.block-intro .container');
-  const normalSections = document.getElementById('normalSections');
-  const scrollIndicator = document.querySelector('.block-intro__scroll');
+  const introBlock = document.querySelector('.block-intro');
+  const htmlElement = document.documentElement;
+  const normalSections = document.querySelector('.normal-sections');
 
-  if (!intro || !normalSections) return;
+  if (!introBlock || !normalSections) return;
 
-  let isTransitioning = false;
-  let isIntroVisible = true;
-  let isAtBottom = false;
+  window.introBlock = introBlock;
+  window.htmlElement = htmlElement;
+  window.introAnimating = false;
+  window.introLastScrollTop = 0;
 
-  // Сохраняем позицию скролла внутри intro
-  let savedScrollPosition = 0;
+  const restartWatcher = () => {
+    if (modules_flsModules?.watcher) {
+      if (modules_flsModules.watcher.observer) {
+        modules_flsModules.watcher.observer.disconnect();
+      }
+      requestAnimationFrame(() => {
+        modules_flsModules.watcher.scrollWatcherRun();
+      });
+    }
+  };
 
-  // Функция для определения, доскроллен ли контент внутри intro до конца
-  function isIntroContentScrolledToBottom() {
-    if (!introContainer) return true;
+  const positionNormalSections = () => {
+    normalSections.style.transform = `translateY(${introBlock.offsetHeight}px)`;
+  };
 
-    const scrollTop = introContainer.scrollTop;
-    const scrollHeight = introContainer.scrollHeight;
-    const clientHeight = introContainer.clientHeight;
+  const resetNormalSectionsPosition = () => {
+    normalSections.style.transform = '';
+  };
 
-    return scrollTop + clientHeight >= scrollHeight - 20;
-  }
-
-  // Функция для определения, находимся ли мы в начале normalSections
-  function isAtNormalSectionsTop() {
-    const normalSectionsRect = normalSections.getBoundingClientRect();
-    return normalSectionsRect.top <= 100 && normalSectionsRect.top >= -100;
-  }
-
-  // Функция закатывания intro (показать normalSections)
-  function rollUpIntro() {
-    if (isTransitioning || !isIntroVisible) return;
-
-    isTransitioning = true;
-    isIntroVisible = false;
-
-    // Сохраняем текущую позицию скролла внутри intro
-    savedScrollPosition = introContainer ? introContainer.scrollTop : 0;
-
-    // Анимация закатывания вверх
-    intro.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-    intro.style.transform = 'translateY(-100%)';
-
-    // Показываем normalSections
-    normalSections.style.display = 'block';
-    normalSections.style.opacity = '1';
-    normalSections.style.visibility = 'visible';
-    normalSections.style.transform = 'translateY(0)';
-
-    // Убираем intro из потока после анимации
-    setTimeout(() => {
-      intro.style.display = 'none';
-      isTransitioning = false;
-    }, 800);
-  }
-
-  // Функция раскатывания intro (вернуться к intro)
-  function rollDownIntro() {
-    if (isTransitioning || isIntroVisible) return;
-
-    isTransitioning = true;
-
-    // Показываем intro обратно
-    intro.style.display = 'flex';
-    intro.style.transform = 'translateY(-100%)';
-
-    // Небольшая задержка для правильной анимации
-    setTimeout(() => {
-      intro.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-      intro.style.transform = 'translateY(0)';
-
-      // Прячем normalSections
-      normalSections.style.opacity = '0';
-      normalSections.style.visibility = 'hidden';
-
-      setTimeout(() => {
-        normalSections.style.display = 'none';
-        isIntroVisible = true;
-        isTransitioning = false;
-
-        // Восстанавливаем позицию скролла внутри intro
-        if (introContainer && savedScrollPosition > 0) {
-          introContainer.scrollTop = savedScrollPosition;
+  const dispatchWatcherEvent = (isIntersecting) => {
+    const event = new CustomEvent('watcherCallback', {
+      detail: {
+        entry: {
+          target: introBlock,
+          isIntersecting
         }
-
-        // Проверяем, достигнут ли конец intro
-        if (isIntroContentScrolledToBottom()) {
-          scrollIndicator?.classList.add('end-reached');
-        }
-      }, 800);
-    }, 50);
-  }
-
-  // Отслеживаем скролл ВНУТРИ intro
-  if (introContainer) {
-    introContainer.addEventListener('scroll', function () {
-      if (!isIntroVisible || isTransitioning) return;
-
-      if (isIntroContentScrolledToBottom()) {
-        scrollIndicator?.classList.add('end-reached');
-        isAtBottom = true;
-      } else {
-        scrollIndicator?.classList.remove('end-reached');
-        isAtBottom = false;
       }
     });
+    document.dispatchEvent(event);
+  };
+
+  window.openIntro = function (callback) {
+    if (window.introAnimating) {
+      if (callback) requestAnimationFrame(() => window.openIntro(callback));
+      return;
+    }
+    window.introAnimating = true;
+
+    introBlock.style.display = 'block';
+    introBlock.classList.remove('intro-closed');
+    introBlock.classList.add('intro-open');
+
+    htmlElement.classList.remove('intro-closed');
+    htmlElement.classList.add('intro-open');
+
+    introBlock.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    positionNormalSections();
+
+    const header = document.querySelector('.header');
+    if (header) {
+      header.classList.remove('_header-scroll');
+    }
+
+    dispatchWatcherEvent(true);
+
+    introBlock.addEventListener('transitionend', function onTransitionEnd() {
+      introBlock.removeEventListener('transitionend', onTransitionEnd);
+      window.introAnimating = false;
+      if (callback) callback();
+    });
+  };
+
+  window.closeIntro = function (callback) {
+    if (window.introAnimating) {
+      if (callback) requestAnimationFrame(() => window.closeIntro(callback));
+      return;
+    }
+    window.introAnimating = true;
+
+    introBlock.classList.remove('intro-open');
+    introBlock.classList.add('intro-closed');
+
+    htmlElement.classList.remove('intro-open');
+    htmlElement.classList.add('intro-closed');
+
+    document.body.style.overflow = '';
+    resetNormalSectionsPosition();
+
+    introBlock.addEventListener('transitionend', function onTransitionEnd() {
+      introBlock.removeEventListener('transitionend', onTransitionEnd);
+
+      restartWatcher();
+      dispatchWatcherEvent(false);
+
+      if (typeof forceUpdateNavigation === 'function') {
+        forceUpdateNavigation();
+      }
+
+      window.introAnimating = false;
+      if (callback) callback();
+    });
+  };
+
+  function isAtBottom() {
+    const scrollTop = introBlock.scrollTop;
+    const scrollHeight = introBlock.scrollHeight;
+    const clientHeight = introBlock.clientHeight;
+    return scrollHeight - scrollTop <= clientHeight + 5;
   }
 
-  // Отслеживаем скролл окна для обратного перехода
-  window.addEventListener('wheel', function (e) {
-    if (isTransitioning) return;
+  introBlock.addEventListener('scroll', function () {
+    if (window.introAnimating) return;
 
-    const scrollingDown = e.deltaY > 0;
-    const scrollingUp = e.deltaY < 0;
+    const currentScrollTop = introBlock.scrollTop;
+    const scrollingDown = currentScrollTop > window.introLastScrollTop;
+    window.introLastScrollTop = currentScrollTop;
 
-    if (isIntroVisible) {
-      // Мы в intro
-      if (scrollingDown && isIntroContentScrolledToBottom()) {
+    if (scrollingDown && isAtBottom()) {
+      window.closeIntro();
+    }
+  });
+
+  document.addEventListener('wheel', function (e) {
+    if (window.introAnimating) return;
+
+    const isIntroOpen = htmlElement.classList.contains('intro-open');
+    const isIntroClosed = htmlElement.classList.contains('intro-closed');
+
+    if (isIntroOpen) return;
+
+    if (isIntroClosed && e.deltaY < 0 && window.scrollY <= 10) {
+      e.preventDefault();
+      window.openIntro();
+    }
+  }, { passive: false });
+
+  let touchStartY = 0;
+
+  document.addEventListener('touchstart', function (e) {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function (e) {
+    if (window.introAnimating) return;
+
+    const isIntroClosed = htmlElement.classList.contains('intro-closed');
+
+    if (isIntroClosed && window.scrollY <= 10) {
+      const touchEndY = e.touches[0].clientY;
+      const swipeDown = touchEndY - touchStartY > 20;
+
+      if (swipeDown) {
         e.preventDefault();
-        rollUpIntro();
-      }
-    } else {
-      // Мы в normalSections
-      if (scrollingUp && window.scrollY <= 100) {
-        e.preventDefault();
-        rollDownIntro();
+        window.openIntro();
       }
     }
   }, { passive: false });
 
-  // Клик по индикатору скролла
-  if (scrollIndicator) {
-    scrollIndicator.addEventListener('click', function (e) {
-      e.preventDefault();
+  htmlElement.classList.add('intro-open');
+  document.body.style.overflow = 'hidden';
+  positionNormalSections();
 
-      if (!isIntroVisible || isTransitioning) return;
-
-      if (!isIntroContentScrolledToBottom()) {
-        // Скроллим контент внутри intro до конца
-        introContainer.scrollTo({
-          top: introContainer.scrollHeight,
-          behavior: 'smooth'
-        });
-      } else {
-        // Если уже в конце - закатываем intro
-        rollUpIntro();
-      }
-    });
+  if (isAtBottom()) {
+    window.closeIntro();
   }
-
-  // Touch события для мобильных
-  let touchStartY = 0;
-  let touchStartScrollY = 0;
-
-  window.addEventListener('touchstart', function (e) {
-    touchStartY = e.touches[0].clientY;
-    touchStartScrollY = window.scrollY;
-  }, { passive: true });
-
-  window.addEventListener('touchend', function (e) {
-    if (isTransitioning) return;
-
-    const touchEndY = e.changedTouches[0].clientY;
-    const touchDelta = touchStartY - touchEndY;
-    const scrollingDown = touchDelta > 30;
-    const scrollingUp = touchDelta < -30;
-
-    if (isIntroVisible) {
-      // Мы в intro - скроллим внутри
-      if (scrollingDown && isIntroContentScrolledToBottom()) {
-        e.preventDefault();
-        rollUpIntro();
-      }
-    } else {
-      // Мы в normalSections
-      if (scrollingUp && window.scrollY <= 100) {
-        e.preventDefault();
-        rollDownIntro();
-      }
-    }
-  });
-
-  // Инициализация
-  normalSections.style.display = 'none';
-  normalSections.style.opacity = '0';
-  normalSections.style.visibility = 'hidden';
-  normalSections.style.transition = 'opacity 0.5s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-
-  // Добавляем кнопку "наверх" в normalSections (опционально)
-  addBackToIntroButton();
-
-  function addBackToIntroButton() {
-    const backButton = document.createElement('div');
-    backButton.className = 'back-to-intro';
-    backButton.innerHTML = `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 5L12 19M12 5L5 12M12 5L19 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <span>Back to intro</span>
-        `;
-
-    backButton.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (!isTransitioning && !isIntroVisible) {
-        rollDownIntro();
-      }
-    });
-
-    normalSections.appendChild(backButton);
-  }
-});*/
-
+});
