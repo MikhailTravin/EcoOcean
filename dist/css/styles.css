@@ -1698,17 +1698,6 @@ a {
 .block-intro::-webkit-scrollbar {
   display: none;
 }
-@media (max-width: 1200px) {
-  .block-intro {
-    padding: 200px 0px;
-  }
-}
-@media (max-width: 992px) {
-  .block-intro {
-    min-height: 100%;
-    padding: 115px 0px 150px 0px;
-  }
-}
 .block-intro .container {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
@@ -1786,6 +1775,17 @@ a {
   gap: 80px;
   position: relative;
   padding: 202px 0px 250px 0px;
+}
+@media (max-width: 1200px) {
+  .block-intro__contents {
+    padding: 200px 0px;
+  }
+}
+@media (max-width: 992px) {
+  .block-intro__contents {
+    min-height: 100%;
+    padding: 115px 0px 150px 0px;
+  }
 }
 .block-intro__content {
   -webkit-box-flex: 1;
