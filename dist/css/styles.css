@@ -1251,9 +1251,6 @@ body {
   background: #011831;
   padding: 0px 0px 0px 0px !important;
 }
-.intro-open body {
-  overflow: hidden;
-}
 body.hide-scrollbar {
   margin: 0px 0px 0px 0px !important;
 }
@@ -1332,6 +1329,11 @@ a {
     gap: 8px;
     font-size: 16px;
     line-height: 125%;
+  }
+}
+@media (max-width: 480px) {
+  .btn {
+    font-size: 14px;
   }
 }
 .btn span {
@@ -1681,9 +1683,9 @@ a {
 }
 
 .block-intro {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
+  -webkit-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
   z-index: 15;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1693,14 +1695,12 @@ a {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
-  height: 100vh;
   min-height: 100vh;
-  overflow: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
-.block-intro::-webkit-scrollbar {
-  display: none;
+.block-intro.scrolled .block-intro__content {
+  -webkit-transform: translateY(-30px);
+          transform: translateY(-30px);
+  opacity: 0.7;
 }
 .block-intro .container {
   -webkit-box-flex: 1;
@@ -1723,8 +1723,8 @@ a {
   height: 100%;
   min-height: 100%;
   opacity: 0;
-  -webkit-transition: opacity 1.5s ease-out;
-  transition: opacity 1.5s ease-out;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .block-intro__bg._watcher-view {
   opacity: 1;
@@ -1779,6 +1779,10 @@ a {
   gap: 80px;
   position: relative;
   padding: 202px 0px 250px 0px;
+  -webkit-transition: opacity 0.4s ease-out, -webkit-transform 0.4s ease-out;
+  transition: opacity 0.4s ease-out, -webkit-transform 0.4s ease-out;
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out, -webkit-transform 0.4s ease-out;
 }
 @media (max-width: 1200px) {
   .block-intro__contents {
@@ -1813,10 +1817,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(50px);
           transform: translateY(50px);
-  -webkit-transition: opacity 1s ease-out, -webkit-transform 1s ease-out;
-  transition: opacity 1s ease-out, -webkit-transform 1s ease-out;
-  transition: opacity 1s ease-out, transform 1s ease-out;
-  transition: opacity 1s ease-out, transform 1s ease-out, -webkit-transform 1s ease-out;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-intro__content._watcher-view {
   opacity: 1;
@@ -1838,10 +1842,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.8s ease-out 0.2s, -webkit-transform 0.8s ease-out 0.2s;
-  transition: opacity 0.8s ease-out 0.2s, -webkit-transform 0.8s ease-out 0.2s;
-  transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s;
-  transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s, -webkit-transform 0.8s ease-out 0.2s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-intro__content p._watcher-view {
   opacity: 1;
@@ -1871,10 +1875,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.8s ease-out 0.1s, -webkit-transform 0.8s ease-out 0.1s;
-  transition: opacity 0.8s ease-out 0.1s, -webkit-transform 0.8s ease-out 0.1s;
-  transition: opacity 0.8s ease-out 0.1s, transform 0.8s ease-out 0.1s;
-  transition: opacity 0.8s ease-out 0.1s, transform 0.8s ease-out 0.1s, -webkit-transform 0.8s ease-out 0.1s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-intro__text._watcher-view {
   opacity: 1;
@@ -1899,10 +1903,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.8s ease-out 0.3s, -webkit-transform 0.8s ease-out 0.3s;
-  transition: opacity 0.8s ease-out 0.3s, -webkit-transform 0.8s ease-out 0.3s;
-  transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s;
-  transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s, -webkit-transform 0.8s ease-out 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-intro__buttons._watcher-view {
   opacity: 1;
@@ -1962,8 +1966,8 @@ a {
   height: 190px;
   z-index: 10;
   opacity: 0;
-  -webkit-transition: opacity 1s ease-out 0.4s;
-  transition: opacity 1s ease-out 0.4s;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .block-intro__scroll._watcher-view {
   opacity: 1;
@@ -2051,53 +2055,12 @@ a {
             transform: rotate(360deg);
   }
 }
-.block-intro.intro-closed {
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  -webkit-transition: opacity 0.8s ease-in-out, visibility 0.8s, -webkit-transform 0.8s ease-in-out;
-  transition: opacity 0.8s ease-in-out, visibility 0.8s, -webkit-transform 0.8s ease-in-out;
-  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0.8s;
-  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, visibility 0.8s, -webkit-transform 0.8s ease-in-out;
-}
-
-.normal-sections {
-  position: relative;
-  z-index: 10;
-  margin-top: 100px;
-  -webkit-transition: margin-top 0.3s ease-out;
-  transition: margin-top 0.3s ease-out;
-}
-@media (max-width: 768px) {
-  .normal-sections {
-    margin-top: 50px;
-  }
-}
-
-/* Скрываем normal-sections, когда интро открыто */
-.intro-open .normal-sections {
-  visibility: hidden;
-  opacity: 0;
-  -webkit-transition: visibility 0s linear 0.5s, opacity 0.5s ease;
-  transition: visibility 0s linear 0.5s, opacity 0.5s ease;
-}
-
-/* Показываем normal-sections, когда интро закрыто */
-.intro-closed .normal-sections {
-  visibility: visible;
-  opacity: 1;
-  -webkit-transition: visibility 0s linear 0s, opacity 0.5s ease;
-  transition: visibility 0s linear 0s, opacity 0.5s ease;
-}
-
 .block-descr {
   position: relative;
   padding: 110px 0px 120px 0px;
   opacity: 0;
-  -webkit-transition: opacity 1.2s ease-out;
-  transition: opacity 1.2s ease-out;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .block-descr._watcher-view {
   opacity: 1;
@@ -2162,8 +2125,8 @@ a {
   -o-object-fit: contain;
      object-fit: contain;
   opacity: 0;
-  -webkit-transition: opacity 1.5s ease-out;
-  transition: opacity 1.5s ease-out;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .block-descr__bg._watcher-view {
   opacity: 1;
@@ -2186,8 +2149,8 @@ a {
 .block-descr__bg-mob {
   display: none;
   opacity: 0;
-  -webkit-transition: opacity 1.5s ease-out;
-  transition: opacity 1.5s ease-out;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .block-descr__bg-mob._watcher-view {
   opacity: 1;
@@ -2222,10 +2185,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.8s ease-out 0.1s, -webkit-transform 0.8s ease-out 0.1s;
-  transition: opacity 0.8s ease-out 0.1s, -webkit-transform 0.8s ease-out 0.1s;
-  transition: opacity 0.8s ease-out 0.1s, transform 0.8s ease-out 0.1s;
-  transition: opacity 0.8s ease-out 0.1s, transform 0.8s ease-out 0.1s, -webkit-transform 0.8s ease-out 0.1s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-top._watcher-view {
   opacity: 1;
@@ -2247,10 +2210,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(20px);
           transform: translateY(20px);
-  -webkit-transition: opacity 0.8s ease-out 0.2s, -webkit-transform 0.8s ease-out 0.2s;
-  transition: opacity 0.8s ease-out 0.2s, -webkit-transform 0.8s ease-out 0.2s;
-  transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s;
-  transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s, -webkit-transform 0.8s ease-out 0.2s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-top .title2._watcher-view {
   opacity: 1;
@@ -2278,10 +2241,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(20px);
           transform: translateY(20px);
-  -webkit-transition: opacity 0.8s ease-out 0.3s, -webkit-transform 0.8s ease-out 0.3s;
-  transition: opacity 0.8s ease-out 0.3s, -webkit-transform 0.8s ease-out 0.3s;
-  transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s;
-  transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s, -webkit-transform 0.8s ease-out 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-top p._watcher-view {
   opacity: 1;
@@ -2339,24 +2302,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-}
-.block-descr-top__column:nth-child(1) {
-  -webkit-transition: opacity 0.8s ease-out 0.4s, -webkit-transform 0.8s ease-out 0.4s;
-  transition: opacity 0.8s ease-out 0.4s, -webkit-transform 0.8s ease-out 0.4s;
-  transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
-  transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s, -webkit-transform 0.8s ease-out 0.4s;
-}
-.block-descr-top__column:nth-child(2) {
-  -webkit-transition: opacity 0.8s ease-out 0.5s, -webkit-transform 0.8s ease-out 0.5s;
-  transition: opacity 0.8s ease-out 0.5s, -webkit-transform 0.8s ease-out 0.5s;
-  transition: opacity 0.8s ease-out 0.5s, transform 0.8s ease-out 0.5s;
-  transition: opacity 0.8s ease-out 0.5s, transform 0.8s ease-out 0.5s, -webkit-transform 0.8s ease-out 0.5s;
-}
-.block-descr-top__column:nth-child(3) {
-  -webkit-transition: opacity 0.8s ease-out 0.6s, -webkit-transform 0.8s ease-out 0.6s;
-  transition: opacity 0.8s ease-out 0.6s, -webkit-transform 0.8s ease-out 0.6s;
-  transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s;
-  transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s, -webkit-transform 0.8s ease-out 0.6s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-top__column._watcher-view {
   opacity: 1;
@@ -2392,10 +2341,10 @@ a {
   position: relative;
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
-  -webkit-transition: -webkit-transform 0.6s ease-out 0.4s;
-  transition: -webkit-transform 0.6s ease-out 0.4s;
-  transition: transform 0.6s ease-out 0.4s;
-  transition: transform 0.6s ease-out 0.4s, -webkit-transform 0.6s ease-out 0.4s;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-top__image._watcher-view {
   -webkit-transform: scale(1);
@@ -2446,10 +2395,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(40px);
           transform: translateY(40px);
-  -webkit-transition: opacity 0.9s ease-out 0.2s, -webkit-transform 0.9s ease-out 0.2s;
-  transition: opacity 0.9s ease-out 0.2s, -webkit-transform 0.9s ease-out 0.2s;
-  transition: opacity 0.9s ease-out 0.2s, transform 0.9s ease-out 0.2s;
-  transition: opacity 0.9s ease-out 0.2s, transform 0.9s ease-out 0.2s, -webkit-transform 0.9s ease-out 0.2s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-center._watcher-view {
   opacity: 1;
@@ -2488,10 +2437,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(20px);
           transform: translateY(20px);
-  -webkit-transition: opacity 0.8s ease-out 0.3s, -webkit-transform 0.8s ease-out 0.3s;
-  transition: opacity 0.8s ease-out 0.3s, -webkit-transform 0.8s ease-out 0.3s;
-  transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s;
-  transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s, -webkit-transform 0.8s ease-out 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-center__title._watcher-view {
   opacity: 1;
@@ -2556,24 +2505,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(-20px);
           transform: translateX(-20px);
-}
-.block-descr-center__column:nth-child(1) {
-  -webkit-transition: opacity 0.8s ease-out 0.4s, -webkit-transform 0.8s ease-out 0.4s;
-  transition: opacity 0.8s ease-out 0.4s, -webkit-transform 0.8s ease-out 0.4s;
-  transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
-  transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s, -webkit-transform 0.8s ease-out 0.4s;
-}
-.block-descr-center__column:nth-child(2) {
-  -webkit-transition: opacity 0.8s ease-out 0.5s, -webkit-transform 0.8s ease-out 0.5s;
-  transition: opacity 0.8s ease-out 0.5s, -webkit-transform 0.8s ease-out 0.5s;
-  transition: opacity 0.8s ease-out 0.5s, transform 0.8s ease-out 0.5s;
-  transition: opacity 0.8s ease-out 0.5s, transform 0.8s ease-out 0.5s, -webkit-transform 0.8s ease-out 0.5s;
-}
-.block-descr-center__column:nth-child(3) {
-  -webkit-transition: opacity 0.8s ease-out 0.6s, -webkit-transform 0.8s ease-out 0.6s;
-  transition: opacity 0.8s ease-out 0.6s, -webkit-transform 0.8s ease-out 0.6s;
-  transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s;
-  transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s, -webkit-transform 0.8s ease-out 0.6s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-center__column._watcher-view {
   opacity: 1;
@@ -2634,10 +2569,10 @@ a {
   opacity: 0;
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
-  -webkit-transition: opacity 0.9s ease-out 0.7s, -webkit-transform 0.9s ease-out 0.7s;
-  transition: opacity 0.9s ease-out 0.7s, -webkit-transform 0.9s ease-out 0.7s;
-  transition: opacity 0.9s ease-out 0.7s, transform 0.9s ease-out 0.7s;
-  transition: opacity 0.9s ease-out 0.7s, transform 0.9s ease-out 0.7s, -webkit-transform 0.9s ease-out 0.7s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-center__info._watcher-view {
   opacity: 1;
@@ -2686,10 +2621,10 @@ a {
   height: auto;
   -webkit-transform: rotate(-15deg) scale(0.8);
           transform: rotate(-15deg) scale(0.8);
-  -webkit-transition: -webkit-transform 0.8s ease-out 0.8s;
-  transition: -webkit-transform 0.8s ease-out 0.8s;
-  transition: transform 0.8s ease-out 0.8s;
-  transition: transform 0.8s ease-out 0.8s, -webkit-transform 0.8s ease-out 0.8s;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-center__icon._watcher-view {
   -webkit-transform: rotate(0) scale(1);
@@ -2708,8 +2643,8 @@ a {
   min-height: 180px;
   height: auto;
   opacity: 0;
-  -webkit-transition: opacity 1.2s ease-out 0.2s;
-  transition: opacity 1.2s ease-out 0.2s;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .block-descr-center__bg._watcher-view {
   opacity: 1;
@@ -2732,8 +2667,8 @@ a {
   height: auto;
   display: none;
   opacity: 0;
-  -webkit-transition: opacity 1.2s ease-out 0.2s;
-  transition: opacity 1.2s ease-out 0.2s;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .block-descr-center__bg-mob._watcher-view {
   opacity: 1;
@@ -2757,10 +2692,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(40px);
           transform: translateY(40px);
-  -webkit-transition: opacity 1s ease-out 0.3s, -webkit-transform 1s ease-out 0.3s;
-  transition: opacity 1s ease-out 0.3s, -webkit-transform 1s ease-out 0.3s;
-  transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s;
-  transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s, -webkit-transform 1s ease-out 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-bottom._watcher-view {
   opacity: 1;
@@ -2805,10 +2740,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(20px);
           transform: translateY(20px);
-  -webkit-transition: opacity 0.8s ease-out 0.4s, -webkit-transform 0.8s ease-out 0.4s;
-  transition: opacity 0.8s ease-out 0.4s, -webkit-transform 0.8s ease-out 0.4s;
-  transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
-  transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s, -webkit-transform 0.8s ease-out 0.4s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-bottom .title2._watcher-view {
   opacity: 1;
@@ -2884,30 +2819,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-}
-.block-descr-bottom__column:nth-child(1) {
-  -webkit-transition: opacity 0.8s ease-out 0.5s, -webkit-transform 0.8s ease-out 0.5s;
-  transition: opacity 0.8s ease-out 0.5s, -webkit-transform 0.8s ease-out 0.5s;
-  transition: opacity 0.8s ease-out 0.5s, transform 0.8s ease-out 0.5s;
-  transition: opacity 0.8s ease-out 0.5s, transform 0.8s ease-out 0.5s, -webkit-transform 0.8s ease-out 0.5s;
-}
-.block-descr-bottom__column:nth-child(2) {
-  -webkit-transition: opacity 0.8s ease-out 0.6s, -webkit-transform 0.8s ease-out 0.6s;
-  transition: opacity 0.8s ease-out 0.6s, -webkit-transform 0.8s ease-out 0.6s;
-  transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s;
-  transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s, -webkit-transform 0.8s ease-out 0.6s;
-}
-.block-descr-bottom__column:nth-child(3) {
-  -webkit-transition: opacity 0.8s ease-out 0.7s, -webkit-transform 0.8s ease-out 0.7s;
-  transition: opacity 0.8s ease-out 0.7s, -webkit-transform 0.8s ease-out 0.7s;
-  transition: opacity 0.8s ease-out 0.7s, transform 0.8s ease-out 0.7s;
-  transition: opacity 0.8s ease-out 0.7s, transform 0.8s ease-out 0.7s, -webkit-transform 0.8s ease-out 0.7s;
-}
-.block-descr-bottom__column:nth-child(4) {
-  -webkit-transition: opacity 0.8s ease-out 0.8s, -webkit-transform 0.8s ease-out 0.8s;
-  transition: opacity 0.8s ease-out 0.8s, -webkit-transform 0.8s ease-out 0.8s;
-  transition: opacity 0.8s ease-out 0.8s, transform 0.8s ease-out 0.8s;
-  transition: opacity 0.8s ease-out 0.8s, transform 0.8s ease-out 0.8s, -webkit-transform 0.8s ease-out 0.8s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-bottom__column._watcher-view {
   opacity: 1;
@@ -2919,10 +2834,10 @@ a {
   height: 130px;
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
-  -webkit-transition: -webkit-transform 0.6s ease-out 0.5s;
-  transition: -webkit-transform 0.6s ease-out 0.5s;
-  transition: transform 0.6s ease-out 0.5s;
-  transition: transform 0.6s ease-out 0.5s, -webkit-transform 0.6s ease-out 0.5s;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-bottom__column img._watcher-view {
   -webkit-transform: scale(1);
@@ -2978,10 +2893,10 @@ a {
   opacity: 0;
   -webkit-transform: rotate(-10deg) scale(0.8);
           transform: rotate(-10deg) scale(0.8);
-  -webkit-transition: opacity 0.9s ease-out 0.9s, -webkit-transform 0.9s ease-out 0.9s;
-  transition: opacity 0.9s ease-out 0.9s, -webkit-transform 0.9s ease-out 0.9s;
-  transition: opacity 0.9s ease-out 0.9s, transform 0.9s ease-out 0.9s;
-  transition: opacity 0.9s ease-out 0.9s, transform 0.9s ease-out 0.9s, -webkit-transform 0.9s ease-out 0.9s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-descr-bottom__icons._watcher-view {
   opacity: 1;
@@ -3102,10 +3017,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(50px);
           transform: translateY(50px);
-  -webkit-transition: opacity 0.8s ease, -webkit-transform 0.8s ease;
-  transition: opacity 0.8s ease, -webkit-transform 0.8s ease;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  transition: opacity 0.8s ease, transform 0.8s ease, -webkit-transform 0.8s ease;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__column._watcher-view {
   opacity: 1;
@@ -3215,10 +3130,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.6s ease 0.2s, -webkit-transform 0.6s ease 0.2s;
-  transition: opacity 0.6s ease 0.2s, -webkit-transform 0.6s ease 0.2s;
-  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
-  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s, -webkit-transform 0.6s ease 0.2s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__top._watcher-view {
   opacity: 1;
@@ -3249,10 +3164,10 @@ a {
   opacity: 0;
   -webkit-transform: scale(0.8);
           transform: scale(0.8);
-  -webkit-transition: opacity 0.5s ease 0.3s, -webkit-transform 0.5s ease 0.3s;
-  transition: opacity 0.5s ease 0.3s, -webkit-transform 0.5s ease 0.3s;
-  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
-  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s, -webkit-transform 0.5s ease 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__number._watcher-view {
   opacity: 1;
@@ -3278,10 +3193,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(20px);
           transform: translateY(20px);
-  -webkit-transition: opacity 0.5s ease 0.4s, -webkit-transform 0.5s ease 0.4s;
-  transition: opacity 0.5s ease 0.4s, -webkit-transform 0.5s ease 0.4s;
-  transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
-  transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s, -webkit-transform 0.5s ease 0.4s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__title._watcher-view {
   opacity: 1;
@@ -3303,10 +3218,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(-30px);
           transform: translateX(-30px);
-  -webkit-transition: opacity 0.6s ease 0.5s, -webkit-transform 0.6s ease 0.5s;
-  transition: opacity 0.6s ease 0.5s, -webkit-transform 0.6s ease 0.5s;
-  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
-  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s, -webkit-transform 0.6s ease 0.5s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__name._watcher-view {
   opacity: 1;
@@ -3360,10 +3275,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(40px);
           transform: translateY(40px);
-  -webkit-transition: opacity 0.7s ease 0.3s, -webkit-transform 0.7s ease 0.3s;
-  transition: opacity 0.7s ease 0.3s, -webkit-transform 0.7s ease 0.3s;
-  transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
-  transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s, -webkit-transform 0.7s ease 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__item._watcher-view {
   opacity: 1;
@@ -3395,10 +3310,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(20px);
           transform: translateY(20px);
-  -webkit-transition: opacity 0.5s ease 0.6s, -webkit-transform 0.5s ease 0.6s;
-  transition: opacity 0.5s ease 0.6s, -webkit-transform 0.5s ease 0.6s;
-  transition: opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s;
-  transition: opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s, -webkit-transform 0.5s ease 0.6s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__text._watcher-view {
   opacity: 1;
@@ -3442,10 +3357,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.5s ease 0.7s, -webkit-transform 0.5s ease 0.7s;
-  transition: opacity 0.5s ease 0.7s, -webkit-transform 0.5s ease 0.7s;
-  transition: opacity 0.5s ease 0.7s, transform 0.5s ease 0.7s;
-  transition: opacity 0.5s ease 0.7s, transform 0.5s ease 0.7s, -webkit-transform 0.5s ease 0.7s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__buttons._watcher-view {
   opacity: 1;
@@ -3499,10 +3414,10 @@ a {
   opacity: 0;
   -webkit-transform: translate(-50%, 50px);
           transform: translate(-50%, 50px);
-  -webkit-transition: opacity 0.8s ease 0.4s, -webkit-transform 0.8s ease 0.4s;
-  transition: opacity 0.8s ease 0.4s, -webkit-transform 0.8s ease 0.4s;
-  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
-  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s, -webkit-transform 0.8s ease 0.4s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__pic1._watcher-view {
   opacity: 1;
@@ -3584,10 +3499,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(100px);
           transform: translateX(100px);
-  -webkit-transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__pic2._watcher-view {
   opacity: 1;
@@ -3612,8 +3527,8 @@ a {
   height: calc(100% + 563px);
   top: -353px;
   opacity: 0;
-  -webkit-transition: opacity 1s ease 0.2s;
-  transition: opacity 1s ease 0.2s;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .block-projects__bg1._watcher-view {
   opacity: 1;
@@ -3680,10 +3595,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(100px) translateY(50px);
           transform: translateX(100px) translateY(50px);
-  -webkit-transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__pic3._watcher-view {
   opacity: 1;
@@ -3736,10 +3651,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.6s ease 0.6s, -webkit-transform 0.6s ease 0.6s;
-  transition: opacity 0.6s ease 0.6s, -webkit-transform 0.6s ease 0.6s;
-  transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
-  transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s, -webkit-transform 0.6s ease 0.6s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__list._watcher-view {
   opacity: 1;
@@ -3788,50 +3703,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(-20px);
           transform: translateX(-20px);
-  -webkit-transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
-  transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  transition: opacity 0.4s ease, transform 0.4s ease, -webkit-transform 0.4s ease;
-}
-.block-projects__list ul li:nth-child(1) {
-  -webkit-transition-delay: 0.8s;
-          transition-delay: 0.8s;
-}
-.block-projects__list ul li:nth-child(2) {
-  -webkit-transition-delay: 0.9s;
-          transition-delay: 0.9s;
-}
-.block-projects__list ul li:nth-child(3) {
-  -webkit-transition-delay: 1s;
-          transition-delay: 1s;
-}
-.block-projects__list ul li:nth-child(4) {
-  -webkit-transition-delay: 1.1s;
-          transition-delay: 1.1s;
-}
-.block-projects__list ul li:nth-child(5) {
-  -webkit-transition-delay: 1.2s;
-          transition-delay: 1.2s;
-}
-.block-projects__list ul li:nth-child(6) {
-  -webkit-transition-delay: 1.3s;
-          transition-delay: 1.3s;
-}
-.block-projects__list ul li:nth-child(7) {
-  -webkit-transition-delay: 1.4s;
-          transition-delay: 1.4s;
-}
-.block-projects__list ul li:nth-child(8) {
-  -webkit-transition-delay: 1.5s;
-          transition-delay: 1.5s;
-}
-.block-projects__list ul li:nth-child(9) {
-  -webkit-transition-delay: 1.6s;
-          transition-delay: 1.6s;
-}
-.block-projects__list ul li:nth-child(10) {
-  -webkit-transition-delay: 1.7s;
-          transition-delay: 1.7s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__list ul li._watcher-view {
   opacity: 1;
@@ -3860,10 +3735,10 @@ a {
   opacity: 0;
   -webkit-transform: scale(0);
           transform: scale(0);
-  -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
-  transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  transition: opacity 0.3s ease, transform 0.3s ease, -webkit-transform 0.3s ease;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
   -webkit-transition-delay: inherit;
           transition-delay: inherit;
 }
@@ -3897,10 +3772,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(20px);
           transform: translateY(20px);
-  -webkit-transition: opacity 0.5s ease 0.5s, -webkit-transform 0.5s ease 0.5s;
-  transition: opacity 0.5s ease 0.5s, -webkit-transform 0.5s ease 0.5s;
-  transition: opacity 0.5s ease 0.5s, transform 0.5s ease 0.5s;
-  transition: opacity 0.5s ease 0.5s, transform 0.5s ease 0.5s, -webkit-transform 0.5s ease 0.5s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__list-title._watcher-view {
   opacity: 1;
@@ -3918,8 +3793,8 @@ a {
   height: calc(100% + 440px);
   top: -200px;
   opacity: 0;
-  -webkit-transition: opacity 1s ease 0.2s;
-  transition: opacity 1s ease 0.2s;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .block-projects__bg2._watcher-view {
   opacity: 1;
@@ -4014,10 +3889,10 @@ a {
   opacity: 0;
   -webkit-transform: translate(-50%, -50%) scale(0.5);
           transform: translate(-50%, -50%) scale(0.5);
-  -webkit-transition: opacity 0.5s ease 0.8s, -webkit-transform 0.5s ease 0.8s;
-  transition: opacity 0.5s ease 0.8s, -webkit-transform 0.5s ease 0.8s;
-  transition: opacity 0.5s ease 0.8s, transform 0.5s ease 0.8s;
-  transition: opacity 0.5s ease 0.8s, transform 0.5s ease 0.8s, -webkit-transform 0.5s ease 0.8s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__play._watcher-view {
   opacity: 1;
@@ -4047,13 +3922,13 @@ a {
   height: calc(100% + 455px);
   top: 0px;
   opacity: 0;
-  -webkit-transition: opacity 1s ease 0.2s;
-  transition: opacity 1s ease 0.2s;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
   -o-object-fit: cover;
      object-fit: cover;
 }
 .block-projects__bg3._watcher-view {
-  opacity: 1;
+  opacity: 0.6;
 }
 @media (max-width: 768px) {
   .block-projects__bg3 {
@@ -4151,10 +4026,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(100px);
           transform: translateX(100px);
-  -webkit-transition: opacity 0.8s ease 0.4s, -webkit-transform 0.8s ease 0.4s;
-  transition: opacity 0.8s ease 0.4s, -webkit-transform 0.8s ease 0.4s;
-  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
-  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s, -webkit-transform 0.8s ease 0.4s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__pic4._watcher-view {
   opacity: 1;
@@ -4221,10 +4096,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(100px) translateY(50px);
           transform: translateX(100px) translateY(50px);
-  -webkit-transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__pic5._watcher-view {
   opacity: 1;
@@ -4324,10 +4199,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(100px);
           transform: translateX(100px);
-  -webkit-transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__pic6._watcher-view {
   opacity: 1;
@@ -4408,10 +4283,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(100px) translateY(50px);
           transform: translateX(100px) translateY(50px);
-  -webkit-transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s, -webkit-transform 0.8s ease 0.3s;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
 }
 .block-projects__pic7._watcher-view {
   opacity: 1;
@@ -4467,10 +4342,10 @@ a {
   opacity: 0;
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
-  -webkit-transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
   -webkit-transition-delay: 0.1s;
           transition-delay: 0.1s;
 }
@@ -4489,10 +4364,10 @@ a {
   opacity: 0;
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
-  -webkit-transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
   -webkit-transition-delay: 0.1s;
           transition-delay: 0.1s;
 }
@@ -4535,10 +4410,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
   -webkit-transition-delay: 0.2s;
           transition-delay: 0.2s;
 }
@@ -4561,10 +4436,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
   -webkit-transition-delay: 0.3s;
           transition-delay: 0.3s;
 }
@@ -4612,10 +4487,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(-30px);
           transform: translateX(-30px);
-  -webkit-transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
   -webkit-transition-delay: 0.5s;
           transition-delay: 0.5s;
 }
@@ -4638,7 +4513,7 @@ a {
           flex: 0 1 380px;
   width: 100%;
   border-radius: 40px;
-  background: #fff;
+  background: rgba(1, 24, 49, 0.2);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4648,14 +4523,14 @@ a {
   gap: 20px;
   height: 80px;
   padding: 0px 0px 0px 40px;
-  border: 1px solid transparent;
+  border: 2px solid #ff4500;
   opacity: 0;
   -webkit-transform: translateX(-30px);
           transform: translateX(-30px);
-  -webkit-transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
   -webkit-transition-delay: 0.4s;
           transition-delay: 0.4s;
 }
@@ -4675,7 +4550,7 @@ a {
   }
 }
 .block-forms__input._form-error {
-  border: 1px solid red;
+  border: 2px solid red;
 }
 .block-forms__input img {
   -webkit-box-flex: 0;
@@ -4683,10 +4558,12 @@ a {
           flex: 0 0 16px;
   height: auto;
   width: 16px;
-  -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: -webkit-transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+  -webkit-filter: invert(100%) sepia(1%) saturate(2%) hue-rotate(55deg) brightness(1109%) contrast(100%);
+          filter: invert(100%) sepia(1%) saturate(2%) hue-rotate(55deg) brightness(1109%) contrast(100%);
+  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 .block-forms__input img._watcher-view {
   -webkit-transform: rotate(360deg);
@@ -4698,7 +4575,7 @@ a {
   font-weight: 400;
   font-size: 18px;
   line-height: 144%;
-  color: #01040c;
+  color: #fff;
   padding: 0px 40px 0px 0px;
 }
 @media (max-width: 768px) {
@@ -4709,19 +4586,39 @@ a {
   }
 }
 .block-forms__input input::-webkit-input-placeholder {
-  color: rgba(1, 4, 12, 0.8);
+  color: #fff;
 }
 .block-forms__input input::-moz-placeholder {
-  color: rgba(1, 4, 12, 0.8);
+  color: #fff;
 }
 .block-forms__input input:-ms-input-placeholder {
-  color: rgba(1, 4, 12, 0.8);
+  color: #fff;
 }
 .block-forms__input input::-ms-input-placeholder {
-  color: rgba(1, 4, 12, 0.8);
+  color: #fff;
 }
 .block-forms__input input::placeholder {
-  color: rgba(1, 4, 12, 0.8);
+  color: #fff;
+}
+
+.normal-sections {
+  position: relative;
+  z-index: 10;
+  margin-top: -100px;
+  padding-top: 100px;
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+  opacity: 0;
+  -webkit-transition: margin-top 0.3s ease-out, opacity 0.6s ease, -webkit-transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  transition: margin-top 0.3s ease-out, opacity 0.6s ease, -webkit-transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  transition: margin-top 0.3s ease-out, transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.6s ease;
+  transition: margin-top 0.3s ease-out, transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.6s ease, -webkit-transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+.normal-sections.reveal {
+  margin-top: 0;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  opacity: 1;
 }
 
 .footer {
@@ -4818,12 +4715,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(-30px);
           transform: translateX(-30px);
-  -webkit-transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  -webkit-transition-delay: 0.2s;
-          transition-delay: 0.2s;
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 .footer-top__logo._watcher-view {
   opacity: 1;
@@ -4881,12 +4776,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(-20px);
           transform: translateY(-20px);
-  -webkit-transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  -webkit-transition-delay: 0.3s;
-          transition-delay: 0.3s;
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 .footer-top__menu._watcher-view {
   opacity: 1;
@@ -5000,12 +4893,10 @@ a {
   opacity: 0;
   -webkit-transform: translateX(30px);
           transform: translateX(30px);
-  -webkit-transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
-  -webkit-transition-delay: 0.5s;
-          transition-delay: 0.5s;
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 .footer-top__right._watcher-view {
   opacity: 1;
@@ -5040,12 +4931,10 @@ a {
   opacity: 0;
   -webkit-transform: translateY(30px);
           transform: translateY(30px);
-  -webkit-transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  -webkit-transition-delay: 0.7s;
-          transition-delay: 0.7s;
+  -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 .footer-bottom._watcher-view {
   opacity: 1;
@@ -5092,14 +4981,6 @@ a {
   transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
   transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
   transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), -webkit-transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
-}
-.footer-bottom__text:nth-child(1) {
-  -webkit-transition-delay: 0.8s;
-          transition-delay: 0.8s;
-}
-.footer-bottom__text:nth-child(2) {
-  -webkit-transition-delay: 0.9s;
-          transition-delay: 0.9s;
 }
 @media (max-width: 992px) {
   .footer-bottom__text {

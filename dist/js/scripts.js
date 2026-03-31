@@ -572,212 +572,86 @@ Fancybox.bind("[data-fancybox]", {
 
 //========================================================================================================================================================
 
-function initHeaderScroll() {
-  const header = document.querySelector('.header');
-  const introBlock = document.querySelector('.block-intro');
-
-  if (!header || !introBlock) return;
-
-  let ticking = false;
-
-  function updateHeaderScrollClass() {
-    const htmlElement = document.documentElement;
-
-    if (htmlElement.classList.contains('intro-open')) {
-      if (introBlock.scrollTop > 0) {
-        header.classList.add('_header-scroll');
-      } else {
-        header.classList.remove('_header-scroll');
-      }
+// Добавление к шапке при скролле
+const header = document.querySelector('.header');
+if (header) {
+  function checkScroll() {
+    if (window.scrollY > 0) {
+      header.classList.add('_header-scroll');
     } else {
-      if (window.scrollY > 0) {
-        header.classList.add('_header-scroll');
-      } else {
-        header.classList.remove('_header-scroll');
-      }
-    }
-
-    ticking = false;
-  }
-
-  function requestTick() {
-    if (!ticking) {
-      requestAnimationFrame(updateHeaderScrollClass);
-      ticking = true;
+      header.classList.remove('_header-scroll');
     }
   }
 
-  introBlock.addEventListener('scroll', requestTick);
-  window.addEventListener('scroll', requestTick);
-
-  requestTick();
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initHeaderScroll);
-} else {
-  initHeaderScroll();
+  checkScroll();
+  window.addEventListener('scroll', checkScroll);
 }
 
 //========================================================================================================================================================
 
+//Прокрутка к блоку
 let gotoBlock = (targetBlock, noHeader = false, speed = 500, offsetTop = 0) => {
   const targetBlockElement = document.querySelector(targetBlock);
-  const introBlock = document.querySelector('.block-intro');
-  const normalSections = document.querySelector('.normal-sections');
-  const htmlElement = document.documentElement;
 
   if (!targetBlockElement) {
     console.warn(`Element ${targetBlock} not found`);
     return;
   }
 
-  const isTargetIntro = targetBlockElement.classList.contains('block-intro');
+  let headerItem = '';
+  let headerItemHeight = 0;
 
-  const addHeaderScrollClass = () => {
-    const header = document.querySelector('.header');
-    if (header) header.classList.add('_header-scroll');
-  };
-
-  const removeHeaderScrollClass = () => {
-    const header = document.querySelector('.header');
-    if (header) header.classList.remove('_header-scroll');
-  };
-
-  const positionNormalSections = () => {
-    if (normalSections && introBlock) {
-      normalSections.style.transform = `translateY(${introBlock.offsetHeight}px)`;
-    }
-  };
-
-  const resetNormalSectionsPosition = () => {
-    if (normalSections) {
-      normalSections.style.transform = '';
-    }
-  };
-
-  const dispatchWatcherEvent = (isIntersecting) => {
-    const event = new CustomEvent('watcherCallback', {
-      detail: {
-        entry: {
-          target: introBlock,
-          isIntersecting
-        }
-      }
-    });
-    document.dispatchEvent(event);
-  };
-
-  if (isTargetIntro) {
-    if (htmlElement.classList.contains('intro-closed')) {
-      if (typeof window.openIntro === 'function') {
-        window.openIntro(() => {
-          introBlock.scrollTop = 0;
-          positionNormalSections();
-          removeHeaderScrollClass();
-
-          requestAnimationFrame(() => {
-            dispatchWatcherEvent(true);
-          });
-        });
+  if (noHeader) {
+    headerItem = 'header.header';
+    const headerElement = document.querySelector(headerItem);
+    if (headerElement) {
+      if (!headerElement.classList.contains('_header-scroll')) {
+        headerElement.style.cssText = `transition-duration: 0s;`;
+        headerElement.classList.add('_header-scroll');
+        headerItemHeight = headerElement.offsetHeight;
+        headerElement.classList.remove('_header-scroll');
+        setTimeout(() => {
+          headerElement.style.cssText = ``;
+        }, 0);
       } else {
-        introBlock.scrollTop = 0;
-        positionNormalSections();
-        removeHeaderScrollClass();
+        headerItemHeight = headerElement.offsetHeight;
       }
-    } else {
-      introBlock.scrollTop = 0;
-      positionNormalSections();
-      removeHeaderScrollClass();
-
-      requestAnimationFrame(() => {
-        dispatchWatcherEvent(true);
-      });
     }
-    return;
   }
 
-  function performScroll() {
-    let headerItem = '';
-    let headerItemHeight = 0;
-
-    if (noHeader) {
-      headerItem = 'header.header';
-      const headerElement = document.querySelector(headerItem);
-      if (headerElement) {
-        if (!headerElement.classList.contains('_header-scroll')) {
-          headerElement.style.cssText = `transition-duration: 0s;`;
-          headerElement.classList.add('_header-scroll');
-          headerItemHeight = headerElement.offsetHeight;
-          headerElement.classList.remove('_header-scroll');
-          requestAnimationFrame(() => {
-            headerElement.style.cssText = ``;
-          });
-        } else {
-          headerItemHeight = headerElement.offsetHeight;
-        }
-      }
+  if (document.documentElement.classList.contains("menu-open")) {
+    if (typeof menuClose === 'function') {
+      menuClose();
     }
-
-    addHeaderScrollClass();
-    resetNormalSectionsPosition();
-
-    if (typeof SmoothScroll !== 'undefined') {
-      let options = {
-        speedAsDuration: true,
-        speed: speed,
-        header: headerItem,
-        offset: offsetTop,
-        easing: 'easeOutQuad',
-      };
-      new SmoothScroll().animateScroll(targetBlockElement, '', options);
-    } else {
-      let targetBlockElementPosition = targetBlockElement.getBoundingClientRect().top + window.scrollY;
-
-      if (headerItemHeight) {
-        targetBlockElementPosition -= headerItemHeight;
-      }
-
-      if (offsetTop) {
-        targetBlockElementPosition -= offsetTop;
-      }
-
-      window.scrollTo({
-        top: targetBlockElementPosition,
-        behavior: "smooth"
-      });
-    }
-
-    requestAnimationFrame(addHeaderScrollClass);
   }
 
-  if (htmlElement.classList.contains('intro-open')) {
-    if (typeof window.closeIntro === 'function') {
-      window.closeIntro(() => {
-        introBlock.addEventListener('transitionend', function onTransitionEnd() {
-          introBlock.removeEventListener('transitionend', onTransitionEnd);
-
-          performScroll();
-
-          if (typeof forceUpdateNavigation === 'function') {
-            requestAnimationFrame(() => {
-              forceUpdateNavigation();
-            });
-          }
-        });
-      });
-    } else {
-      performScroll();
-    }
+  if (typeof SmoothScroll !== 'undefined') {
+    let options = {
+      speedAsDuration: true,
+      speed: speed,
+      header: headerItem,
+      offset: offsetTop,
+      easing: 'easeOutQuad',
+    };
+    new SmoothScroll().animateScroll(targetBlockElement, '', options);
   } else {
-    performScroll();
+    let targetBlockElementPosition = targetBlockElement.getBoundingClientRect().top + window.scrollY;
+
+    if (headerItemHeight) {
+      targetBlockElementPosition -= headerItemHeight;
+    }
+
+    if (offsetTop) {
+      targetBlockElementPosition -= offsetTop;
+    }
+
+    window.scrollTo({
+      top: targetBlockElementPosition,
+      behavior: "smooth"
+    });
   }
 };
-
 function pageNavigation() {
-  document.removeEventListener("click", pageNavigationAction);
-  document.removeEventListener("watcherCallback", pageNavigationAction);
-
   document.addEventListener("click", pageNavigationAction);
   document.addEventListener("watcherCallback", pageNavigationAction);
 
@@ -792,10 +666,7 @@ function pageNavigation() {
         const gotoSpeed = gotoLink.dataset.gotoSpeed ? parseInt(gotoLink.dataset.gotoSpeed) : 500;
         const offsetTop = gotoLink.dataset.gotoTop ? parseInt(gotoLink.dataset.gotoTop) : 0;
 
-        const header = document.querySelector('.header');
-        if (header) header.classList.add('_header-scroll');
-
-        if (window.modules_flsModules?.fullpage) {
+        if (window.modules_flsModules && modules_flsModules.fullpage) {
           const fullpageSection = document.querySelector(`${gotoLinkSelector}`)?.closest('[data-fp-section]');
           const fullpageSectionId = fullpageSection ? +fullpageSection.dataset.fpId : null;
 
@@ -815,298 +686,88 @@ function pageNavigation() {
       const entry = e.detail.entry;
       const targetElement = entry.target;
 
-      if (targetElement?.dataset?.watch === 'navigator') {
-        updateActiveNavigation(targetElement, entry.isIntersecting);
+      if (targetElement.dataset.watch === 'navigator') {
+        document.querySelectorAll('[data-goto]._navigator-active').forEach(el => {
+          el.classList.remove('_navigator-active');
+        });
+
+        const navigatorLinks = findNavigatorLinks(targetElement);
+        navigatorLinks.forEach(link => {
+          if (entry.isIntersecting) {
+            link.classList.add('_navigator-active');
+          } else {
+            link.classList.remove('_navigator-active');
+          }
+        });
       }
-    }
-  }
-
-  function updateActiveNavigation(element, isIntersecting) {
-    const allLinksForElement = findNavigatorLinks(element);
-
-    if (isIntersecting) {
-      document.querySelectorAll('[data-goto]._navigator-active').forEach(el => {
-        el.classList.remove('_navigator-active');
-      });
-
-      allLinksForElement.forEach(link => {
-        link.classList.add('_navigator-active');
-      });
-    } else {
-      allLinksForElement.forEach(link => {
-        link.classList.remove('_navigator-active');
-      });
     }
   }
 
   function findNavigatorLinks(element) {
     const links = [];
-    const selectors = [];
 
     if (element.id) {
-      selectors.push(`#${element.id}`);
+      const idLinks = document.querySelectorAll(`[data-goto="#${element.id}"]`);
+      links.push(...idLinks);
     }
 
-    if (element.classList?.length) {
-      Array.from(element.classList).forEach(className => {
-        if (className &&
-          !className.startsWith('_') &&
-          className !== 'container' &&
-          className !== 'block-intro__content' &&
-          className !== 'block-intro__bg') {
-          selectors.push(`.${className}`);
-        }
+    if (element.classList.length) {
+      element.classList.forEach(className => {
+        const classLinks = document.querySelectorAll(`[data-goto=".${className}"]`);
+        links.push(...classLinks);
       });
     }
 
-    selectors.forEach(selector => {
-      const foundLinks = document.querySelectorAll(`[data-goto="${selector}"]`);
-      foundLinks.forEach(link => links.push(link));
-    });
-
-    return [...new Set(links)];
+    return links;
   }
 }
+pageNavigation();
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', pageNavigation);
-} else {
-  pageNavigation();
-}
+//========================================================================================================================================================
 
-function forceUpdateNavigation() {
-  const watchElements = document.querySelectorAll('[data-watch="navigator"]');
-  let ticking = false;
+const introSection = document.querySelector('.block-intro');
 
-  const checkVisibility = () => {
-    const htmlElement = document.documentElement;
-    const introBlock = document.querySelector('.block-intro');
+if (introSection) {
 
-    if (htmlElement.classList.contains('intro-open') && introBlock) {
-      const event = new CustomEvent('watcherCallback', {
-        detail: {
-          entry: {
-            target: introBlock,
-            isIntersecting: true
-          }
-        }
-      });
-      document.dispatchEvent(event);
-      return;
-    }
-
-    if (htmlElement.classList.contains('intro-closed')) {
-      watchElements.forEach(element => {
-        if (element === introBlock) return;
-
-        const rect = element.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-        if (isVisible) {
-          const event = new CustomEvent('watcherCallback', {
-            detail: {
-              entry: {
-                target: element,
-                isIntersecting: true
-              }
-            }
-          });
-          document.dispatchEvent(event);
-        }
-      });
-    }
-
-    ticking = false;
-  };
-
-  const requestTick = () => {
-    if (!ticking) {
-      requestAnimationFrame(checkVisibility);
-      ticking = true;
-    }
-  };
-
-  window.removeEventListener('scroll', requestTick);
-  window.removeEventListener('resize', requestTick);
-
-  window.addEventListener('scroll', requestTick);
-  window.addEventListener('resize', requestTick);
-
-  requestTick();
-
-  if (document.readyState === 'complete') {
-    requestTick();
-  } else {
-    window.addEventListener('load', requestTick, { once: true });
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  const introBlock = document.querySelector('.block-intro');
-  const htmlElement = document.documentElement;
   const normalSections = document.querySelector('.normal-sections');
+  const introContent = document.querySelector('.block-intro__content');
 
-  if (!introBlock || !normalSections) return;
+  function checkVisibility() {
+    const introRect = introSection.getBoundingClientRect();
+    const introBottom = introRect.bottom;
+    const viewportHeight = window.innerHeight;
+    const introHidden = Math.min(Math.max(1 - (introBottom / viewportHeight), 0), 1);
 
-  window.introBlock = introBlock;
-  window.htmlElement = htmlElement;
-  window.introAnimating = false;
-  window.introLastScrollTop = 0;
-
-  const restartWatcher = () => {
-    if (modules_flsModules?.watcher) {
-      if (modules_flsModules.watcher.observer) {
-        modules_flsModules.watcher.observer.disconnect();
-      }
-      requestAnimationFrame(() => {
-        modules_flsModules.watcher.scrollWatcherRun();
-      });
-    }
-  };
-
-  const positionNormalSections = () => {
-    normalSections.style.transform = `translateY(${introBlock.offsetHeight}px)`;
-  };
-
-  const resetNormalSectionsPosition = () => {
-    normalSections.style.transform = '';
-  };
-
-  const dispatchWatcherEvent = (isIntersecting) => {
-    const event = new CustomEvent('watcherCallback', {
-      detail: {
-        entry: {
-          target: introBlock,
-          isIntersecting
-        }
-      }
-    });
-    document.dispatchEvent(event);
-  };
-
-  window.openIntro = function (callback) {
-    if (window.introAnimating) {
-      if (callback) requestAnimationFrame(() => window.openIntro(callback));
-      return;
-    }
-    window.introAnimating = true;
-
-    introBlock.style.display = 'block';
-    introBlock.classList.remove('intro-closed');
-    introBlock.classList.add('intro-open');
-
-    htmlElement.classList.remove('intro-closed');
-    htmlElement.classList.add('intro-open');
-
-    introBlock.scrollTop = 0;
-    document.body.style.overflow = 'hidden';
-    positionNormalSections();
-
-    const header = document.querySelector('.header');
-    if (header) {
-      header.classList.remove('_header-scroll');
+    if (introHidden > 0.2) {
+      introSection.classList.add('scrolled');
+    } else {
+      introSection.classList.remove('scrolled');
     }
 
-    dispatchWatcherEvent(true);
-
-    introBlock.addEventListener('transitionend', function onTransitionEnd() {
-      introBlock.removeEventListener('transitionend', onTransitionEnd);
-      window.introAnimating = false;
-      if (callback) callback();
-    });
-  };
-
-  window.closeIntro = function (callback) {
-    if (window.introAnimating) {
-      if (callback) requestAnimationFrame(() => window.closeIntro(callback));
-      return;
+    if (introHidden > 0.5) {
+      normalSections.classList.add('reveal');
+    } else {
+      normalSections.classList.remove('reveal');
     }
-    window.introAnimating = true;
 
-    introBlock.classList.remove('intro-open');
-    introBlock.classList.add('intro-closed');
-
-    htmlElement.classList.remove('intro-open');
-    htmlElement.classList.add('intro-closed');
-
-    document.body.style.overflow = '';
-    resetNormalSectionsPosition();
-
-    introBlock.addEventListener('transitionend', function onTransitionEnd() {
-      introBlock.removeEventListener('transitionend', onTransitionEnd);
-
-      restartWatcher();
-      dispatchWatcherEvent(false);
-
-      if (typeof forceUpdateNavigation === 'function') {
-        forceUpdateNavigation();
-      }
-
-      window.introAnimating = false;
-      if (callback) callback();
-    });
-  };
-
-  function isAtBottom() {
-    const scrollTop = introBlock.scrollTop;
-    const scrollHeight = introBlock.scrollHeight;
-    const clientHeight = introBlock.clientHeight;
-    return scrollHeight - scrollTop <= clientHeight + 5;
+    if (introContent) {
+      const scale = 1 - (introHidden * 0.1);
+      const blur = introHidden * 3;
+      introContent.style.transform = `scale(${scale})`;
+      introContent.style.filter = `blur(${blur}px)`;
+    }
   }
 
-  introBlock.addEventListener('scroll', function () {
-    if (window.introAnimating) return;
-
-    const currentScrollTop = introBlock.scrollTop;
-    const scrollingDown = currentScrollTop > window.introLastScrollTop;
-    window.introLastScrollTop = currentScrollTop;
-
-    if (scrollingDown && isAtBottom()) {
-      window.closeIntro();
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        checkVisibility();
+        ticking = false;
+      });
+      ticking = true;
     }
   });
 
-  document.addEventListener('wheel', function (e) {
-    if (window.introAnimating) return;
-
-    const isIntroOpen = htmlElement.classList.contains('intro-open');
-    const isIntroClosed = htmlElement.classList.contains('intro-closed');
-
-    if (isIntroOpen) return;
-
-    if (isIntroClosed && e.deltaY < 0 && window.scrollY <= 10) {
-      e.preventDefault();
-      window.openIntro();
-    }
-  }, { passive: false });
-
-  let touchStartY = 0;
-
-  document.addEventListener('touchstart', function (e) {
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  document.addEventListener('touchmove', function (e) {
-    if (window.introAnimating) return;
-
-    const isIntroClosed = htmlElement.classList.contains('intro-closed');
-
-    if (isIntroClosed && window.scrollY <= 10) {
-      const touchEndY = e.touches[0].clientY;
-      const swipeDown = touchEndY - touchStartY > 20;
-
-      if (swipeDown) {
-        e.preventDefault();
-        window.openIntro();
-      }
-    }
-  }, { passive: false });
-
-  htmlElement.classList.add('intro-open');
-  document.body.style.overflow = 'hidden';
-  positionNormalSections();
-
-  if (isAtBottom()) {
-    window.closeIntro();
-  }
-});
+  checkVisibility();
+}

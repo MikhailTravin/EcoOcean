@@ -1,18 +1,16 @@
 .block-intro {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
+    transition: opacity 0.4s ease;
     z-index: 15;
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
     min-height: 100vh;
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-        display: none;
+    &.scrolled {
+        .block-intro__content {
+            transform: translateY(-30px);
+            opacity: 0.7;
+        }
     }
 
     .container {
@@ -32,7 +30,7 @@
         height: 100%;
         min-height: 100%;
         opacity: 0;
-        transition: opacity 1.5s ease-out;
+        transition: opacity 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -91,6 +89,9 @@
         gap: 80px;
         position: relative;
         padding: 202px 0px 250px 0px;
+        transition:
+            transform 0.4s ease-out,
+            opacity 0.4s ease-out;
         @media (max-width: 1200px) {
             padding: 200px 0px;
         }
@@ -114,8 +115,8 @@
         opacity: 0;
         transform: translateY(50px);
         transition:
-            opacity 1s ease-out,
-            transform 1s ease-out;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -138,8 +139,8 @@
             opacity: 0;
             transform: translateY(30px);
             transition:
-                opacity 0.8s ease-out 0.2s,
-                transform 0.8s ease-out 0.2s;
+                opacity 0.5s,
+                transform 0.5s;
 
             &._watcher-view {
                 opacity: 1;
@@ -171,8 +172,8 @@
         opacity: 0;
         transform: translateY(30px);
         transition:
-            opacity 0.8s ease-out 0.1s,
-            transform 0.8s ease-out 0.1s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -195,8 +196,8 @@
         opacity: 0;
         transform: translateY(30px);
         transition:
-            opacity 0.8s ease-out 0.3s,
-            transform 0.8s ease-out 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -243,7 +244,7 @@
         height: 190px;
         z-index: 10;
         opacity: 0;
-        transition: opacity 1s ease-out 0.4s;
+        transition: opacity 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -305,52 +306,13 @@
     }
 }
 
-.block-intro.intro-closed {
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition:
-        transform 0.8s ease-in-out,
-        opacity 0.8s ease-in-out,
-        visibility 0.8s;
-}
-
-.normal-sections {
-    position: relative;
-    z-index: 10;
-    margin-top: 100px;
-    transition: margin-top 0.3s ease-out;
-    @media (max-width: 768px) {
-        margin-top: 50px;
-    }
-}
-
-/* Скрываем normal-sections, когда интро открыто */
-.intro-open .normal-sections {
-    visibility: hidden;
-    opacity: 0;
-    transition:
-        visibility 0s linear 0.5s,
-        opacity 0.5s ease;
-}
-
-/* Показываем normal-sections, когда интро закрыто */
-.intro-closed .normal-sections {
-    visibility: visible;
-    opacity: 1;
-    transition:
-        visibility 0s linear 0s,
-        opacity 0.5s ease;
-}
-
 //========================================================================================================================================================
 
 .block-descr {
     position: relative;
     padding: 110px 0px 120px 0px;
     opacity: 0;
-    transition: opacity 1.2s ease-out;
+    transition: opacity 0.5s;
 
     &._watcher-view {
         opacity: 1;
@@ -406,7 +368,7 @@
         height: auto;
         object-fit: contain;
         opacity: 0;
-        transition: opacity 1.5s ease-out;
+        transition: opacity 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -428,7 +390,7 @@
     &__bg-mob {
         display: none;
         opacity: 0;
-        transition: opacity 1.5s ease-out;
+        transition: opacity 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -455,8 +417,8 @@
     opacity: 0;
     transform: translateY(30px);
     transition:
-        opacity 0.8s ease-out 0.1s,
-        transform 0.8s ease-out 0.1s;
+        opacity 0.5s,
+        transform 0.5s;
 
     &._watcher-view {
         opacity: 1;
@@ -475,8 +437,8 @@
         opacity: 0;
         transform: translateY(20px);
         transition:
-            opacity 0.8s ease-out 0.2s,
-            transform 0.8s ease-out 0.2s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -503,8 +465,8 @@
         opacity: 0;
         transform: translateY(20px);
         transition:
-            opacity 0.8s ease-out 0.3s,
-            transform 0.8s ease-out 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -546,22 +508,9 @@
         gap: 30px;
         opacity: 0;
         transform: translateY(30px);
-
-        &:nth-child(1) {
-            transition:
-                opacity 0.8s ease-out 0.4s,
-                transform 0.8s ease-out 0.4s;
-        }
-        &:nth-child(2) {
-            transition:
-                opacity 0.8s ease-out 0.5s,
-                transform 0.8s ease-out 0.5s;
-        }
-        &:nth-child(3) {
-            transition:
-                opacity 0.8s ease-out 0.6s,
-                transform 0.8s ease-out 0.6s;
-        }
+        transition:
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -590,7 +539,7 @@
         padding: 10px;
         position: relative;
         transform: scale(0.9);
-        transition: transform 0.6s ease-out 0.4s;
+        transition: transform 0.5s;
 
         &._watcher-view {
             transform: scale(1);
@@ -647,8 +596,8 @@
     opacity: 0;
     transform: translateY(40px);
     transition:
-        opacity 0.9s ease-out 0.2s,
-        transform 0.9s ease-out 0.2s;
+        opacity 0.5s,
+        transform 0.5s;
 
     &._watcher-view {
         opacity: 1;
@@ -689,8 +638,8 @@
         opacity: 0;
         transform: translateY(20px);
         transition:
-            opacity 0.8s ease-out 0.3s,
-            transform 0.8s ease-out 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -740,22 +689,9 @@
         line-height: 150%;
         opacity: 0;
         transform: translateX(-20px);
-
-        &:nth-child(1) {
-            transition:
-                opacity 0.8s ease-out 0.4s,
-                transform 0.8s ease-out 0.4s;
-        }
-        &:nth-child(2) {
-            transition:
-                opacity 0.8s ease-out 0.5s,
-                transform 0.8s ease-out 0.5s;
-        }
-        &:nth-child(3) {
-            transition:
-                opacity 0.8s ease-out 0.6s,
-                transform 0.8s ease-out 0.6s;
-        }
+        transition:
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -803,8 +739,8 @@
         opacity: 0;
         transform: scale(0.95);
         transition:
-            opacity 0.9s ease-out 0.7s,
-            transform 0.9s ease-out 0.7s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -845,7 +781,7 @@
         width: 60px;
         height: auto;
         transform: rotate(-15deg) scale(0.8);
-        transition: transform 0.8s ease-out 0.8s;
+        transition: transform 0.5s;
 
         &._watcher-view {
             transform: rotate(0) scale(1);
@@ -866,7 +802,7 @@
         min-height: 180px;
         height: auto;
         opacity: 0;
-        transition: opacity 1.2s ease-out 0.2s;
+        transition: opacity 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -890,7 +826,7 @@
         height: auto;
         display: none;
         opacity: 0;
-        transition: opacity 1.2s ease-out 0.2s;
+        transition: opacity 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -912,8 +848,8 @@
     opacity: 0;
     transform: translateY(40px);
     transition:
-        opacity 1s ease-out 0.3s,
-        transform 1s ease-out 0.3s;
+        opacity 0.5s,
+        transform 0.5s;
 
     &._watcher-view {
         opacity: 1;
@@ -942,8 +878,8 @@
         opacity: 0;
         transform: translateY(20px);
         transition:
-            opacity 0.8s ease-out 0.4s,
-            transform 0.8s ease-out 0.4s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1003,28 +939,9 @@
         gap: 23px;
         opacity: 0;
         transform: translateY(30px);
-
-        &:nth-child(1) {
-            transition:
-                opacity 0.8s ease-out 0.5s,
-                transform 0.8s ease-out 0.5s;
-        }
-        &:nth-child(2) {
-            transition:
-                opacity 0.8s ease-out 0.6s,
-                transform 0.8s ease-out 0.6s;
-        }
-        &:nth-child(3) {
-            transition:
-                opacity 0.8s ease-out 0.7s,
-                transform 0.8s ease-out 0.7s;
-        }
-        &:nth-child(4) {
-            transition:
-                opacity 0.8s ease-out 0.8s,
-                transform 0.8s ease-out 0.8s;
-        }
-
+        transition:
+            opacity 0.5s,
+            transform 0.5s;
         &._watcher-view {
             opacity: 1;
             transform: translateY(0);
@@ -1034,7 +951,7 @@
             width: auto;
             height: 130px;
             transform: scale(0.9);
-            transition: transform 0.6s ease-out 0.5s;
+            transition: transform 0.5s;
 
             &._watcher-view {
                 transform: scale(1);
@@ -1075,8 +992,8 @@
         opacity: 0;
         transform: rotate(-10deg) scale(0.8);
         transition:
-            opacity 0.9s ease-out 0.9s,
-            transform 0.9s ease-out 0.9s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1193,8 +1110,8 @@
         opacity: 0;
         transform: translateY(50px);
         transition:
-            opacity 0.8s ease,
-            transform 0.8s ease;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1295,8 +1212,8 @@
         opacity: 0;
         transform: translateY(30px);
         transition:
-            opacity 0.6s ease 0.2s,
-            transform 0.6s ease 0.2s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1329,8 +1246,8 @@
         opacity: 0;
         transform: scale(0.8);
         transition:
-            opacity 0.5s ease 0.3s,
-            transform 0.5s ease 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1358,8 +1275,8 @@
         opacity: 0;
         transform: translateY(20px);
         transition:
-            opacity 0.5s ease 0.4s,
-            transform 0.5s ease 0.4s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1384,8 +1301,8 @@
         opacity: 0;
         transform: translateX(-30px);
         transition:
-            opacity 0.6s ease 0.5s,
-            transform 0.6s ease 0.5s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1436,8 +1353,8 @@
         opacity: 0;
         transform: translateY(40px);
         transition:
-            opacity 0.7s ease 0.3s,
-            transform 0.7s ease 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1467,8 +1384,8 @@
         opacity: 0;
         transform: translateY(20px);
         transition:
-            opacity 0.5s ease 0.6s,
-            transform 0.5s ease 0.6s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1509,8 +1426,8 @@
         opacity: 0;
         transform: translateY(30px);
         transition:
-            opacity 0.5s ease 0.7s,
-            transform 0.5s ease 0.7s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1560,8 +1477,8 @@
         opacity: 0;
         transform: translate(-50%, 50px);
         transition:
-            opacity 0.8s ease 0.4s,
-            transform 0.8s ease 0.4s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1643,8 +1560,8 @@
         opacity: 0;
         transform: translateX(100px);
         transition:
-            opacity 0.8s ease 0.3s,
-            transform 0.8s ease 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1670,7 +1587,7 @@
         height: calc(100% + 563px);
         top: -353px;
         opacity: 0;
-        transition: opacity 1s ease 0.2s;
+        transition: opacity 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1744,8 +1661,8 @@
         opacity: 0;
         transform: translateX(100px) translateY(50px);
         transition:
-            opacity 0.8s ease 0.3s,
-            transform 0.8s ease 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1790,8 +1707,8 @@
         opacity: 0;
         transform: translateY(30px);
         transition:
-            opacity 0.6s ease 0.6s,
-            transform 0.6s ease 0.6s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1829,14 +1746,8 @@
                 opacity: 0;
                 transform: translateX(-20px);
                 transition:
-                    opacity 0.4s ease,
-                    transform 0.4s ease;
-
-                @for $i from 1 through 10 {
-                    &:nth-child(#{$i}) {
-                        transition-delay: 0.7s + ($i * 0.1s);
-                    }
-                }
+                    opacity 0.5s,
+                    transform 0.5s;
 
                 &._watcher-view {
                     opacity: 1;
@@ -1868,8 +1779,8 @@
         opacity: 0;
         transform: scale(0);
         transition:
-            opacity 0.3s ease,
-            transform 0.3s ease;
+            opacity 0.5s,
+            transform 0.5s;
         transition-delay: inherit;
 
         &._watcher-view {
@@ -1904,8 +1815,8 @@
         opacity: 0;
         transform: translateY(20px);
         transition:
-            opacity 0.5s ease 0.5s,
-            transform 0.5s ease 0.5s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -1925,7 +1836,7 @@
         height: calc(100% + 440px);
         top: -200px;
         opacity: 0;
-        transition: opacity 1s ease 0.2s;
+        transition: opacity 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -2025,8 +1936,8 @@
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.5);
         transition:
-            opacity 0.5s ease 0.8s,
-            transform 0.5s ease 0.8s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -2058,11 +1969,11 @@
         height: calc(100% + 455px);
         top: 0px;
         opacity: 0;
-        transition: opacity 1s ease 0.2s;
+        transition: opacity 0.5s;
         object-fit: cover;
 
         &._watcher-view {
-            opacity: 1;
+            opacity: 0.6;
         }
 
         @media (max-width: 768px) {
@@ -2173,8 +2084,8 @@
         opacity: 0;
         transform: translateX(100px);
         transition:
-            opacity 0.8s ease 0.4s,
-            transform 0.8s ease 0.4s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -2246,8 +2157,8 @@
         opacity: 0;
         transform: translateX(100px) translateY(50px);
         transition:
-            opacity 0.8s ease 0.3s,
-            transform 0.8s ease 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -2346,8 +2257,8 @@
         opacity: 0;
         transform: translateX(100px);
         transition:
-            opacity 0.8s ease 0.3s,
-            transform 0.8s ease 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -2432,8 +2343,8 @@
         opacity: 0;
         transform: translateX(100px) translateY(50px);
         transition:
-            opacity 0.8s ease 0.3s,
-            transform 0.8s ease 0.3s;
+            opacity 0.5s,
+            transform 0.5s;
 
         &._watcher-view {
             opacity: 1;
@@ -2485,8 +2396,8 @@
         opacity: 0;
         transform: scale(0.95);
         transition:
-            opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1),
-            transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+            opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1),
+            transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
         transition-delay: 0.1s;
 
         &._watcher-view {
@@ -2506,8 +2417,8 @@
         opacity: 0;
         transform: scale(0.95);
         transition:
-            opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1),
-            transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+            opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1),
+            transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
         transition-delay: 0.1s;
 
         &._watcher-view {
@@ -2544,8 +2455,8 @@
             opacity: 0;
             transform: translateY(30px);
             transition:
-                opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1),
-                transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+                opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1),
+                transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
             transition-delay: 0.2s;
 
             &._watcher-view {
@@ -2566,8 +2477,8 @@
             opacity: 0;
             transform: translateY(30px);
             transition:
-                opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1),
-                transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+                opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1),
+                transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
             transition-delay: 0.3s;
 
             &._watcher-view {
@@ -2606,8 +2517,8 @@
             opacity: 0;
             transform: translateX(-30px);
             transition:
-                opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1),
-                transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+                opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1),
+                transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
             transition-delay: 0.5s;
 
             &._watcher-view {
@@ -2628,18 +2539,18 @@
         flex: 0 1 380px;
         width: 100%;
         border-radius: 40px;
-        background: #fff;
+        background: rgba(1, 24, 49, 0.2);
         display: flex;
         align-items: center;
         gap: 20px;
         height: 80px;
         padding: 0px 0px 0px 40px;
-        border: 1px solid transparent;
+        border: 2px solid #ff4500;
         opacity: 0;
         transform: translateX(-30px);
         transition:
-            opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1),
-            transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+            opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1),
+            transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
         transition-delay: 0.4s;
 
         &._watcher-view {
@@ -2655,14 +2566,15 @@
         }
 
         &._form-error {
-            border: 1px solid red;
+            border: 2px solid red;
         }
 
         img {
             flex: 0 0 16px;
             height: auto;
             width: 16px;
-            transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+            filter: invert(100%) sepia(1%) saturate(2%) hue-rotate(55deg) brightness(1109%) contrast(100%);
+            transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
 
             &._watcher-view {
                 transform: rotate(360deg);
@@ -2675,7 +2587,7 @@
             font-weight: 400;
             font-size: 18px;
             line-height: 144%;
-            color: #01040c;
+            color: #fff;
             padding: 0px 40px 0px 0px;
 
             @media (max-width: 768px) {
@@ -2685,8 +2597,28 @@
             }
 
             &::placeholder {
-                color: rgba(1, 4, 12, 0.8);
+                color: #fff;
             }
         }
+    }
+}
+
+//========================================================================================================================================================
+
+.normal-sections {
+    position: relative;
+    z-index: 10;
+    margin-top: -100px;
+    padding-top: 100px;
+    transform: translateY(50px);
+    opacity: 0;
+    transition:
+        margin-top 0.3s ease-out,
+        transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+        opacity 0.6s ease;
+    &.reveal {
+        margin-top: 0;
+        transform: translateY(0);
+        opacity: 1;
     }
 }

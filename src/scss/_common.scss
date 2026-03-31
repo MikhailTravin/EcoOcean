@@ -6,9 +6,6 @@ body {
   line-height: 120%;
   background: #011831;
   padding: 0px 0px 0px 0px !important;
-  .intro-open & {
-    overflow: hidden;
-  }
   &.hide-scrollbar {
     margin: 0px 0px 0px 0px !important;
   }
@@ -80,6 +77,9 @@ a {
     gap: 8px;
     font-size: 16px;
     line-height: 125%;
+  }
+  @media (max-width: 480px) {
+    font-size: 14px;
   }
   span {
     position: relative;
