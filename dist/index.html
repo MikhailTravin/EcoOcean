@@ -41,7 +41,7 @@
 							</ul>
 						</div>
 						<div class="header__right">
-							<a href="./" class="btn btn-transparent"><span>Donate now</span></a>
+							<a href="./" data-popup="#forms" class="btn btn-transparent"><span>Donate now</span></a>
 							<button type="button" class="icon-menu"><span></span></button>
 						</div>
 					</div>
@@ -69,7 +69,7 @@
 									the collective efforts of the global community
 								</p>
 								<div data-watch data-watch-once class="block-intro__buttons">
-									<a href="./" class="btn btn-orange">
+									<a href="./" data-popup="#forms" class="btn btn-orange">
 										<span>I want to help</span>
 										<div class="btn__icon">
 											<svg aria-hidden="true" width="7" height="10">
@@ -77,7 +77,7 @@
 											</svg>
 										</div>
 									</a>
-									<a href="./" class="btn btn-blue">
+									<a href="./" data-popup="#forms" class="btn btn-blue">
 										<span>I need help</span>
 										<div class="btn__icon">
 											<svg aria-hidden="true" width="7" height="10">
@@ -2146,7 +2146,7 @@
 								</ul>
 							</div>
 							<div class="footer-top__right" data-watch data-watch-once>
-								<a href="./" class="btn btn-transparent"><span>Donate now</span></a>
+								<a href="./" data-popup="#forms" class="btn btn-transparent"><span>Donate now</span></a>
 							</div>
 						</div>
 						<div class="footer-bottom" data-watch data-watch-once>
@@ -2160,6 +2160,65 @@
 					</div>
 				</div>
 			</footer>
+		</div>
+		<div id="forms" aria-hidden="true" class="popup popup-forms">
+			<div class="popup__wrapper">
+				<div class="popup__content">
+					<div data-close class="popup__close">
+						<img src="img/icons/close.svg" alt="">
+					</div>
+					<div class="popup-forms__body">
+						<div class="popup-forms__top">
+							<div class="popup-forms__title">Contact us</div>
+						</div>
+						<form action="#" class="form">
+							<div class="form__inputs">
+								<div class="form__input">
+									<div class="form__icons">
+										<img loading="lazy" src="img/icons/user.svg" alt="" class="icon1">
+										<img loading="lazy" src="img/icons/user-hover.svg" alt="" class="icon2">
+									</div>
+									<input data-required autocomplete="off" type="text" name="form[1]" placeholder="Name" class="input">
+								</div>
+								<div class="form__input">
+									<div class="form__icons">
+										<img loading="lazy" src="img/icons/mail2.svg" alt="" class="icon1">
+										<img loading="lazy" src="img/icons/mail2-hover.svg" alt="" class="icon2">
+									</div>
+									<input data-required autocomplete="off" type="text" name="form[1]" placeholder="Email" class="input">
+								</div>
+								<div class="form__input">
+									<div class="form__icons">
+										<img loading="lazy" src="img/icons/phone.svg" alt="" class="icon1">
+										<img loading="lazy" src="img/icons/phone-hover.svg" alt="" class="icon2">
+									</div>
+									<input data-required autocomplete="off" type="text" name="form[1]" placeholder="Phone" class="input">
+								</div>
+								<select name="form[1]" class="select1">
+									<option value="" data-show data-label data-label="Subject of the request:" selected>
+										Subject of the request
+									</option>
+									<option value="1">Subject of the request1</option>
+									<option value="2">Subject of the request2</option>
+									<option value="3">Subject of the request3</option>
+									<option value="4">Subject of the request4</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-orange">
+								<span>send</span>
+								<div class="btn__icon">
+									<svg aria-hidden="true" width="7" height="10">
+										<use xlink:href="img/sprite.svg#arrow2"></use>
+									</svg>
+								</div>
+							</button>
+							<div class="form__text">
+								By clicking the "Send" button, you agree to the <a href="./">privacy policy</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 		<script src="js/dynamic_adapt.js"></script>
 		<script src="js/fancybox.umd.js"></script>
