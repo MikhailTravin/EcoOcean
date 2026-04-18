@@ -182,7 +182,6 @@ function formFieldsInit(options = { viewPass: true, autoHeight: false }) {
       if (targetElement.closest('.form__viewpass')) {
         const viewpassBlock = targetElement.closest('.form__viewpass');
         const input = viewpassBlock.closest('.form__input').querySelector('input');
-
         if (input) {
           const isActive = viewpassBlock.classList.contains('_viewpass-active');
           input.setAttribute("type", isActive ? "password" : "text");
@@ -235,8 +234,16 @@ let formValidate = {
   },
   validateInput(formRequiredItem) {
     let error = 0;
-
-    if (formRequiredItem.dataset.required === "email") {
+    if (formRequiredItem.tagName === "SELECT") {
+      if (!formRequiredItem.value || formRequiredItem.value === '') {
+        this.addError(formRequiredItem);
+        this.removeSuccess(formRequiredItem);
+        error++;
+      } else {
+        this.removeError(formRequiredItem);
+        this.addSuccess(formRequiredItem);
+      }
+    } else if (formRequiredItem.dataset.required === "email") {
       formRequiredItem.value = formRequiredItem.value.replace(" ", "");
       if (this.emailTest(formRequiredItem)) {
         this.addError(formRequiredItem);
@@ -253,7 +260,6 @@ let formValidate = {
     } else if (formRequiredItem.dataset.validate === "password-confirm") {
       const passwordInput = document.getElementById('password');
       if (!passwordInput) return error;
-
       if (formRequiredItem.value !== passwordInput.value) {
         this.addError(formRequiredItem);
         this.removeSuccess(formRequiredItem);
@@ -272,32 +278,72 @@ let formValidate = {
         this.addSuccess(formRequiredItem);
       }
     }
-
     return error;
   },
-  addError(formRequiredItem) {
+  addError(formRequiredItem, customErrorText = null) {
     formRequiredItem.classList.add('_form-error');
-    formRequiredItem.parentElement.classList.add('_form-error');
-    let inputError = formRequiredItem.parentElement.querySelector('.form__error');
-    if (inputError) formRequiredItem.parentElement.removeChild(inputError);
-    if (formRequiredItem.dataset.error) {
-      formRequiredItem.parentElement.insertAdjacentHTML('beforeend', `<div class="form__error">${formRequiredItem.dataset.error}</div>`);
+    const parent = formRequiredItem.closest('.form__input') || formRequiredItem.parentElement;
+    if (parent) {
+      parent.classList.add('_form-error');
+    }
+    let inputError = parent.querySelector('.form__error');
+    if (inputError) parent.removeChild(inputError);
+    const errorText = customErrorText || formRequiredItem.dataset.error;
+    if (errorText) {
+      parent.insertAdjacentHTML('beforeend', `<div class="form__error">${errorText}</div>`);
+    }
+    const selectBlock = formRequiredItem.closest('.select');
+    if (selectBlock) {
+      const selectTitle = selectBlock.querySelector('.select__title');
+      if (selectTitle) {
+        selectTitle.classList.add('_form-error');
+      }
     }
   },
   removeError(formRequiredItem) {
     formRequiredItem.classList.remove('_form-error');
-    formRequiredItem.parentElement.classList.remove('_form-error');
-    if (formRequiredItem.parentElement.querySelector('.form__error')) {
-      formRequiredItem.parentElement.removeChild(formRequiredItem.parentElement.querySelector('.form__error'));
+    const parent = formRequiredItem.closest('.form__input') || formRequiredItem.parentElement;
+    if (parent) {
+      parent.classList.remove('_form-error');
+    }
+    if (parent.querySelector('.form__error')) {
+      parent.removeChild(parent.querySelector('.form__error'));
+    }
+    const selectBlock = formRequiredItem.closest('.select');
+    if (selectBlock) {
+      const selectTitle = selectBlock.querySelector('.select__title');
+      if (selectTitle) {
+        selectTitle.classList.remove('_form-error');
+      }
     }
   },
   addSuccess(formRequiredItem) {
     formRequiredItem.classList.add('_form-success');
-    formRequiredItem.parentElement.classList.add('_form-success');
+    const parent = formRequiredItem.closest('.form__input') || formRequiredItem.parentElement;
+    if (parent) {
+      parent.classList.add('_form-success');
+    }
+    const selectBlock = formRequiredItem.closest('.select');
+    if (selectBlock) {
+      const selectTitle = selectBlock.querySelector('.select__title');
+      if (selectTitle) {
+        selectTitle.classList.add('_form-success');
+      }
+    }
   },
   removeSuccess(formRequiredItem) {
     formRequiredItem.classList.remove('_form-success');
-    formRequiredItem.parentElement.classList.remove('_form-success');
+    const parent = formRequiredItem.closest('.form__input') || formRequiredItem.parentElement;
+    if (parent) {
+      parent.classList.remove('_form-success');
+    }
+    const selectBlock = formRequiredItem.closest('.select');
+    if (selectBlock) {
+      const selectTitle = selectBlock.querySelector('.select__title');
+      if (selectTitle) {
+        selectTitle.classList.remove('_form-success');
+      }
+    }
   },
   formClean(form) {
     form.reset();
@@ -307,19 +353,26 @@ let formValidate = {
         const el = inputs[index];
         el.parentElement.classList.remove('_form-focus');
         el.classList.remove('_form-focus');
-
         el.classList.remove('_form-success');
         el.parentElement.classList.remove('_form-success');
-
         el.parentElement.classList.remove('filled');
-
         formValidate.removeError(el);
-
         if (el.classList.contains('telephone') && el.clearFilled) {
           el.clearFilled();
         }
       }
-
+      let selects = form.querySelectorAll('select');
+      for (let index = 0; index < selects.length; index++) {
+        const el = selects[index];
+        const selectBlock = el.closest('.select');
+        if (selectBlock) {
+          const selectTitle = selectBlock.querySelector('.select__title');
+          if (selectTitle) {
+            selectTitle.classList.remove('_form-error', '_form-success');
+          }
+        }
+        formValidate.removeError(el);
+      }
       let checkboxes = form.querySelectorAll('.checkbox__input');
       if (checkboxes.length > 0) {
         for (let index = 0; index < checkboxes.length; index++) {
@@ -329,7 +382,6 @@ let formValidate = {
           checkbox.closest('.checkbox')?.classList.remove('_form-success');
         }
       }
-
       if (modules_flsModules.select) {
         let selects = form.querySelectorAll('div.select');
         if (selects.length) {
@@ -348,6 +400,25 @@ let formValidate = {
 
 function formSubmit() {
   const forms = document.forms;
+  const popupButtons = document.querySelectorAll('[data-popup="#forms"]');
+  if (popupButtons.length) {
+    for (const button of popupButtons) {
+      button.addEventListener('click', function (e) {
+        const buttonText = this.querySelector('span') ?
+          this.querySelector('span').innerText.trim() :
+          this.innerText.trim();
+        setTimeout(() => {
+          const form = document.querySelector('#forms form');
+          if (form) {
+            const hiddenInput = form.querySelector('input[name="button_subject"]');
+            if (hiddenInput) {
+              hiddenInput.value = buttonText;
+            }
+          }
+        }, 200);
+      });
+    }
+  }
   if (forms.length) {
     for (const form of forms) {
       form.addEventListener('submit', function (e) {
@@ -356,12 +427,16 @@ function formSubmit() {
       });
       form.addEventListener('reset', function (e) {
         const form = e.target;
-        formValidate.formClean(form);
+        if (typeof formValidate !== 'undefined' && formValidate.formClean) {
+          formValidate.formClean(form);
+        }
       });
     }
   }
   async function formSubmitAction(form, e) {
-    const error = !form.hasAttribute('data-no-validate') ? formValidate.getErrors(form) : 0;
+    const error = !form.hasAttribute('data-no-validate') && typeof formValidate !== 'undefined'
+      ? formValidate.getErrors(form)
+      : 0;
     if (error === 0) {
       const ajax = form.hasAttribute('data-ajax');
       if (ajax) {
@@ -369,18 +444,23 @@ function formSubmit() {
         const formAction = form.getAttribute('action') ? form.getAttribute('action').trim() : '#';
         const formMethod = form.getAttribute('method') ? form.getAttribute('method').trim() : 'GET';
         const formData = new FormData(form);
-
         form.classList.add('_sending');
-        const response = await fetch(formAction, {
-          method: formMethod,
-          body: formData
-        });
-        if (response.ok) {
-          let responseResult = await response.json();
-          form.classList.remove('_sending');
-          formSent(form, responseResult);
-        } else {
-          alert("Помилка");
+        try {
+          const response = await fetch(formAction, {
+            method: formMethod,
+            body: formData
+          });
+          if (response.ok) {
+            let responseResult = await response.json();
+            form.classList.remove('_sending');
+            formSent(form, responseResult);
+          } else {
+            alert("Error");
+            form.classList.remove('_sending');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert("Connection error");
           form.classList.remove('_sending');
         }
       } else if (form.hasAttribute('data-dev')) {
@@ -391,7 +471,9 @@ function formSubmit() {
       e.preventDefault();
       if (form.querySelector('._form-error') && form.hasAttribute('data-goto-error')) {
         const formGoToErrorClass = form.dataset.gotoError ? form.dataset.gotoError : '._form-error';
-        gotoBlock(formGoToErrorClass, true, 1000);
+        if (typeof gotoBlock !== 'undefined') {
+          gotoBlock(formGoToErrorClass, true, 1000);
+        }
       }
     }
   }
@@ -401,7 +483,6 @@ function formSubmit() {
         form: form
       }
     }));
-
     const telephoneInputs = form.querySelectorAll('.telephone');
     telephoneInputs.forEach(input => {
       const parent = input.closest('.form__input');
@@ -409,18 +490,24 @@ function formSubmit() {
         parent.classList.remove('filled');
       }
     });
-
     setTimeout(() => {
-      if (modules_flsModules.popup) {
+      if (typeof modules_flsModules !== 'undefined' && modules_flsModules.popup) {
         const popup = form.dataset.popupMessage;
         popup ? modules_flsModules.popup.open(popup) : null;
       }
     }, 0);
-
-    formValidate.formClean(form);
+    if (typeof formValidate !== 'undefined' && formValidate.formClean) {
+      formValidate.formClean(form);
+    }
+    const hiddenInput = form.querySelector('input[name="button_subject"]');
+    if (hiddenInput) {
+      hiddenInput.value = '';
+    }
   }
 }
 formSubmit();
+
+
 
 //========================================================================================================================================================
 

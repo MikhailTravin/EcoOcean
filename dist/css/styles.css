@@ -28,7 +28,7 @@
 }
 @font-face {
   font-family: Gilroy;
-  src: url("../fonts/Gilroy-SemBold.woff2") format("woff2");
+  src: url("../fonts/Gilroy-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -168,10 +168,14 @@ a {
 .select._select-open {
   z-index: 30 !important;
 }
+.select._form-error .select__title {
+  border: 2px solid red;
+}
 .select__body {
   position: relative;
 }
 .select__title {
+  border: 2px solid transparent;
   background: #fff;
   width: 100%;
   color: inherit;
@@ -195,8 +199,8 @@ a {
       -ms-flex-pack: justify;
           justify-content: space-between;
   gap: 10px;
-  -webkit-transition: border-radius 0.3s;
-  transition: border-radius 0.3s;
+  -webkit-transition: border-radius 0.3s, border 0.3s;
+  transition: border-radius 0.3s, border 0.3s;
 }
 @media (max-width: 768px) {
   .select__title {
@@ -1304,7 +1308,7 @@ body::after {
 }
 @media (max-width: 768px) {
   .popup__content {
-    padding: 30px 20px;
+    padding: 50px 20px;
   }
 }
 
@@ -1345,6 +1349,29 @@ body::after {
 @media (max-width: 768px) {
   .popup-forms__body {
     gap: 20px;
+  }
+}
+.popup-forms__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+}
+.popup-forms__top p {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 150%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+@media (max-width: 768px) {
+  .popup-forms__top p {
+    font-size: 16px;
   }
 }
 .popup-forms__title {
